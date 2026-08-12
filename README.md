@@ -101,6 +101,81 @@ depuis le tableau de bord. Elle indique explicitement sa portée : document de s
 localement, sans vérification d'identité, qui ne constitue ni certification ni diplôme. Ne pas
 retirer cette mention sans validation de FGF Consultant.
 
+## Comptes, rôles et administration
+
+Le campus fonctionne dans deux modes. **Sans configuration**, c'est une application statique :
+tout le contenu est accessible, la progression vit dans le navigateur, et les espaces de compte
+affichent un message expliquant qu'ils sont désactivés. **Avec un projet Supabase configuré**,
+les comptes, badges, examens et attestations s'activent.
+
+### Mettre en service le backend
+
+1. Créer un projet sur [supabase.com](https://supabase.com) en choisissant une **région
+   européenne** (Francfort ou Paris) — indispensable pour le RGPD.
+2. Dans l'éditeur SQL, exécuter dans l'ordre les fichiers de `supabase/migrations/` :
+   `0001_schema.sql`, `0002_functions.sql`, puis `0003_badges_seed.sql`.
+3. Copier `.env.example` en `.env.local` et renseigner `VITE_SUPABASE_URL` et
+   `VITE_SUPABASE_ANON_KEY` (Project Settings → API). Ces deux valeurs sont publiques par
+   nature ; la sécurité repose sur les policies, pas sur leur secret. **Ne jamais y mettre la clé
+   `service_role`.**
+4. Créer le premier compte via `/inscription`, puis le promouvoir administrateur depuis
+   l'éditeur SQL de Supabase :
+
+   ```sql
+   update profiles set role = 'admin' where id = (
+     select id from auth.users where email = 'adresse@exemple.fr'
+   );
+   ```
+
+   Les promotions suivantes se font depuis l'interface, dans « Comptes et rôles ».
+
+### Les quatre rôles
+
+| Rôle | Peut |
+|---|---|
+| **Apprenant** | Suivre les parcours, passer QCM et examens, gagner des badges, obtenir ses attestations |
+| **Formateur** | Créer et publier ses cours, modules, leçons, questions et examens ; voir la progression de ses inscrits |
+| **Référent entreprise** | Consulter l'avancement des salariés rattachés à son organisation, sans rien modifier |
+| **Super administrateur** | Gérer comptes, rôles et entreprises ; accéder à tous les cours et examens |
+
+Routes correspondantes : `/formateur`, `/formateur/examens`, `/entreprise`, `/admin/comptes`.
+
+### Ce qui est protégé, et comment
+
+La sécurité ne repose pas sur l'interface : les gardes de route ne servent qu'au confort. La
+protection réelle est en base, via Row Level Security sur **toutes** les tables, en refus par
+défaut.
+
+- **Les bonnes réponses ne quittent jamais le serveur avant correction.** `get_quiz()` et
+  `start_exam()` renvoient les énoncés sans le champ `answer` ; `submit_quiz()` et
+  `submit_exam()` calculent le score côté serveur et ne renvoient la correction qu'ensuite. Un
+  score ne peut donc pas être forgé depuis le navigateur.
+- **Les badges sont attribués par le serveur** (`award_badges()`), à partir des tentatives
+  réellement enregistrées.
+- **Un rôle ne se change que par `set_user_role()`**, réservée aux administrateurs. Un trigger
+  empêche par ailleurs quiconque de modifier son propre rôle ou son organisation, et un
+  administrateur ne peut pas se retirer son propre rôle — ce qui laisserait la plateforme sans
+  gestionnaire.
+- **Les attestations sont émises par `issue_credential()`**, qui vérifie elle-même que le
+  parcours est achevé ou l'examen réussi.
+
+### Attestations et certificats : terminologie
+
+Deux documents seulement, et le choix des mots est délibéré :
+
+- **Attestation de suivi** — constate qu'un parcours a été suivi intégralement.
+- **Certificat FGF** — constate la réussite d'un examen interne.
+
+Ni l'un ni l'autre n'est un **diplôme** ni une **certification professionnelle**. Ces deux termes
+sont encadrés en France : un diplôme relève de l'État, une certification suppose un
+enregistrement au RNCP ou au Répertoire spécifique via France Compétences. Tant que FGF
+Consultant n'est pas enregistré, ces mots ne doivent pas apparaître dans l'interface. Les
+examens ne sont affiliés ni au PMI, ni à l'IPMA, ni à l'ICEC, et l'interface le rappelle aux
+formateurs.
+
+Chaque document porte un code de vérification consultable via `verify_credential()`, qui ne
+divulgue que le titulaire, l'intitulé et la date.
+
 ## Tests
 
 ```bash

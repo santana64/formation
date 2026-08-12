@@ -15,6 +15,11 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Account from './pages/Account';
 import RequireAuth from './components/RequireAuth';
+import AdminUsers from './pages/admin/AdminUsers';
+import TrainerCourses from './pages/admin/TrainerCourses';
+import TrainerExams from './pages/admin/TrainerExams';
+import CourseEditor from './pages/admin/CourseEditor';
+import OrgLearners from './pages/admin/OrgLearners';
 import { AuthProvider } from './lib/auth';
 import NotFound from './pages/NotFound';
 import './styles/global.css';
@@ -22,6 +27,7 @@ import './styles/components.css';
 import './styles/pages.css';
 import './styles/features.css';
 import './styles/auth.css';
+import './styles/admin.css';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +50,46 @@ const router = createBrowserRouter([
         element: (
           <RequireAuth>
             <Account />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: 'formateur',
+        element: (
+          <RequireAuth roles={['formateur']}>
+            <TrainerCourses />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: 'formateur/examens',
+        element: (
+          <RequireAuth roles={['formateur']}>
+            <TrainerExams />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: 'formateur/cours/:courseId',
+        element: (
+          <RequireAuth roles={['formateur']}>
+            <CourseEditor />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: 'entreprise',
+        element: (
+          <RequireAuth roles={['referent_entreprise']}>
+            <OrgLearners />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: 'admin/comptes',
+        element: (
+          <RequireAuth roles={['admin']}>
+            <AdminUsers />
           </RequireAuth>
         ),
       },

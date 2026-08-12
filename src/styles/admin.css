@@ -1,0 +1,300 @@
+/* ————— Navigation des espaces d'encadrement ————— */
+
+.admin-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  margin-bottom: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-ctrl);
+}
+.admin-nav__role {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-right: 8px;
+}
+.admin-nav a {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: var(--r-ctrl);
+  color: var(--ink);
+}
+.admin-nav a:hover {
+  background: var(--canvas);
+  text-decoration: none;
+}
+.admin-nav a[aria-current='page'] {
+  background: var(--accent-wash);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ————— Barres d'outils et formulaires ————— */
+
+.admin-toolbar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+.admin-toolbar .field {
+  margin-bottom: 0;
+  min-width: 220px;
+}
+
+.admin-inline-form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 20px 0 28px;
+}
+.admin-inline-form .field {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 240px;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* ————— Panneaux ————— */
+
+.admin-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: 26px 28px;
+  margin-bottom: 24px;
+}
+.admin-panel h2 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  margin-bottom: 14px;
+}
+.admin-panel h3 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  margin: 22px 0 10px;
+}
+
+/* ————— Tableaux d'administration ————— */
+
+.admin-table th[scope='row'] {
+  font-weight: 600;
+}
+.admin-table__sub {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.admin-table select {
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-ctrl);
+  background: var(--surface);
+  color: var(--ink);
+  max-width: 100%;
+}
+.admin-you {
+  margin-left: 8px;
+}
+.admin-danger {
+  color: #a5301f;
+}
+.admin-danger:hover {
+  color: #7f2416;
+}
+
+/* ————— Édition d'un cours ————— */
+
+.module-editor {
+  border: 1px solid var(--line);
+  border-radius: var(--r-ctrl);
+  margin-bottom: 12px;
+  background: var(--canvas);
+}
+.module-editor__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+}
+.module-editor__toggle {
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--display-color);
+  flex: 1;
+}
+.module-editor__toggle .mono {
+  color: var(--accent);
+  font-size: 13px;
+}
+.module-editor__toggle .muted {
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+.module-editor__body {
+  padding: 4px 16px 18px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.editor-list {
+  list-style: none;
+  margin-bottom: 12px;
+}
+.editor-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.editor-list li:last-child {
+  border-bottom: none;
+}
+
+/* ————— Édition d'une question ————— */
+
+.question-editor {
+  border-top: 3px solid var(--accent);
+}
+.choices-field {
+  border: 1px solid var(--line);
+  border-radius: var(--r-ctrl);
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+.choices-field legend {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 0 6px;
+}
+.choice-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.choice-row input[type='radio'],
+.choice-row input[type='checkbox'] {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+.choice-row input[type='text'] {
+  flex: 1;
+  font: inherit;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-ctrl);
+  background: var(--surface);
+  color: var(--ink);
+  min-width: 0;
+}
+.choice-row--check {
+  cursor: pointer;
+}
+
+.exam-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.org-list {
+  list-style: none;
+  margin-bottom: 8px;
+}
+.org-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 15px;
+}
+.org-list li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 760px) {
+  .admin-panel {
+    padding: 20px;
+  }
+  .admin-nav {
+    gap: 4px;
+  }
+  .admin-inline-form .field,
+  .admin-toolbar .field {
+    min-width: 100%;
+  }
+
+  /* Comme le tableau de bord, les tableaux deviennent des cartes empilées. */
+  .admin-table,
+  .admin-table tbody,
+  .admin-table tr,
+  .admin-table td,
+  .admin-table th {
+    display: block;
+  }
+  .admin-table thead {
+    display: none;
+  }
+  .admin-table tr {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    margin-bottom: 12px;
+    padding: 6px 4px 10px;
+  }
+  .admin-table th[scope='row'] {
+    font-family: var(--font-display);
+    font-size: 17px;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 10px;
+  }
+  .admin-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    border-bottom: none;
+    padding: 7px 18px;
+  }
+  .admin-table td::before {
+    content: attr(data-label);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    flex: none;
+  }
+  .editor-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
