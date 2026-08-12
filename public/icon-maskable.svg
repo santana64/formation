@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="FGF Campus">
+  <!-- Icône « maskable » : fond plein bord à bord, monogramme cantonné à la zone
+       de sécurité (80 % centraux) pour survivre au masque rond ou en goutte. -->
+  <rect width="512" height="512" fill="#03045e"/>
+  <text x="256" y="343" font-family="Georgia, 'Times New Roman', serif" font-size="230" font-weight="700" fill="#ffffff" text-anchor="middle">F</text>
+</svg>

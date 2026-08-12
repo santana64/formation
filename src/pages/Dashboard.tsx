@@ -13,10 +13,14 @@ import {
   useProgress,
 } from '../lib/progress';
 import { usePageMeta } from '../lib/meta';
+import { useAuth } from '../lib/auth';
+import { syncLabels, useProgressSync } from '../lib/sync';
 
 export default function Dashboard() {
   usePageMeta('Ma progression', 'Suivi de vos leçons terminées et de vos scores de QCM sur FGF Campus.');
   const progress = useProgress();
+  const { session, enabled } = useAuth();
+  const syncState = useProgressSync(session?.user.id);
   const [notice, setNotice] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -60,9 +64,21 @@ export default function Dashboard() {
         <p className="kicker">Tableau de bord</p>
         <h1>Ma progression</h1>
         <p className="page-head__lead">
-          Votre avancement est enregistré localement, dans ce navigateur et sur cet appareil. Aucune donnée n’est
-          transmise à FGF Consultant.
+          {session
+            ? 'Votre avancement est enregistré sur votre compte : vous le retrouvez sur tous vos appareils.'
+            : 'Votre avancement est enregistré dans ce navigateur, sur cet appareil. Aucune donnée n’est transmise à FGF Consultant.'}
         </p>
+        {syncState !== 'inactif' && (
+          <p className={`sync-state sync-state--${syncState}`} role="status">
+            {syncLabels[syncState]}
+          </p>
+        )}
+        {enabled && !session && (
+          <p className="sync-invite">
+            <Link to="/inscription">Créez un compte</Link> pour conserver cette progression, gagner des badges et
+            recevoir vos attestations. Votre avancement actuel sera repris automatiquement.
+          </p>
+        )}
       </header>
 
       {!anyProgress ? (

@@ -192,6 +192,39 @@
   color: var(--success);
 }
 
+/* ————— État de synchronisation ————— */
+
+.sync-state {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  padding: 5px 12px;
+  border-radius: var(--r-ctrl);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+}
+.sync-state--a-jour {
+  color: var(--success);
+  border-color: var(--success);
+  background: var(--success-wash);
+}
+.sync-state--erreur {
+  color: var(--warn);
+  border-color: var(--warn);
+  background: var(--warn-wash);
+}
+.sync-invite {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-wash);
+  border-radius: 0 var(--r-ctrl) var(--r-ctrl) 0;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
 /* ————— En-tête : état de session ————— */
 
 .session-nav {

@@ -1,0 +1,41 @@
+{
+  "name": "FGF Campus",
+  "short_name": "FGF Campus",
+  "description": "Cours écrits, QCM corrigés et vidéos en management de projet, par FGF Consultant. Les leçons déjà consultées restent lisibles hors ligne.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#03045e",
+  "background_color": "#f1f4f8",
+  "categories": ["education", "business", "productivity"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Catalogue des parcours",
+      "short_name": "Formations",
+      "url": "/formations"
+    },
+    {
+      "name": "Ma progression",
+      "short_name": "Progression",
+      "url": "/progression"
+    }
+  ]
+}
