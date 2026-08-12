@@ -13,6 +13,7 @@ import Search from './pages/Search';
 import Review from './pages/Review';
 import Exam from './pages/Exam';
 import About from './pages/About';
+import Glossary from './pages/Glossary';
 import Legal from './pages/Legal';
 import Privacy from './pages/Privacy';
 import Accessibility from './pages/Accessibility';
@@ -36,6 +37,7 @@ import './styles/auth.css';
 import './styles/admin.css';
 import './styles/review.css';
 import './styles/legal.css';
+import './styles/glossary.css';
 import './styles/charts.css';
 
 const router = createBrowserRouter([
@@ -53,6 +55,7 @@ const router = createBrowserRouter([
       { path: 'progression', element: <Dashboard /> },
       { path: 'revision', element: <Review /> },
       { path: 'entrainement', element: <Exam /> },
+      { path: 'glossaire', element: <Glossary /> },
       { path: 'a-propos', element: <About /> },
       { path: 'mentions-legales', element: <Legal /> },
       { path: 'confidentialite', element: <Privacy /> },

@@ -26,6 +26,7 @@ function useRouteChangeFocus(target: React.RefObject<HTMLElement | null>) {
 const navItems = [
   { to: '/formations', label: 'Formations' },
   { to: '/recherche', label: 'Rechercher' },
+  { to: '/glossaire', label: 'Glossaire' },
   { to: '/progression', label: 'Ma progression' },
   { to: '/a-propos', label: 'À propos' },
 ];

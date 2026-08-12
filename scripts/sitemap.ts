@@ -14,6 +14,7 @@ const paths = [
   '/',
   '/formations',
   '/recherche',
+  '/glossaire',
   '/revision',
   '/entrainement',
   '/progression',
