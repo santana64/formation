@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="FGF Campus — formations en management de projet">
+  <rect width="1200" height="630" fill="#f1f4f8"/>
+  <rect width="1200" height="10" fill="#03045e"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <text x="90" y="200" font-size="34" fill="#0000fd" letter-spacing="4">RECHERCHE · CONSEIL · FORMATION</text>
+    <text x="90" y="310" font-size="86" font-weight="700" fill="#03045e">FGF Campus</text>
+    <text x="90" y="390" font-size="42" fill="#131a2e">Le management de projet,</text>
+    <text x="90" y="446" font-size="42" fill="#131a2e">appris comme il se pratique.</text>
+  </g>
+  <g font-family="system-ui, sans-serif" fill="#545e75" font-size="26">
+    <text x="90" y="545">5 parcours · 29 leçons · 81 questions de QCM · accès libre</text>
+  </g>
+  <g stroke="#03045e" stroke-width="3" fill="none">
+    <path d="M960 250 v230"/>
+  </g>
+  <g font-family="ui-monospace, monospace" font-size="22" fill="#03045e">
+    <text x="990" y="262">01</text>
+    <text x="990" y="322">02</text>
+    <text x="990" y="382">03</text>
+    <text x="990" y="442">04</text>
+  </g>
+  <g fill="#03045e">
+    <circle cx="960" cy="255" r="7"/>
+    <circle cx="960" cy="315" r="7"/>
+    <circle cx="960" cy="375" r="7"/>
+    <circle cx="960" cy="435" r="7"/>
+  </g>
+</svg>
