@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { company } from './data/company';
+import { useAuth } from './lib/auth';
 
 /**
  * À chaque changement de page, remonte en haut et déplace le focus sur la zone
@@ -33,6 +34,7 @@ export default function App() {
   const { pathname } = useLocation();
   const mainRef = useRef<HTMLElement>(null);
   useRouteChangeFocus(mainRef);
+  const { session, profile, enabled } = useAuth();
 
   useEffect(() => {
     setMenuOpen(false);
@@ -73,6 +75,17 @@ export default function App() {
                 {item.label}
               </NavLink>
             ))}
+            {enabled && (
+              <span className="session-nav">
+                {session ? (
+                  <NavLink to="/compte">
+                    <span className="session-nav__name">{profile?.full_name || 'Mon compte'}</span>
+                  </NavLink>
+                ) : (
+                  <NavLink to="/connexion">Connexion</NavLink>
+                )}
+              </span>
+            )}
           </nav>
         </div>
       </header>

@@ -1,0 +1,227 @@
+/* ————— Formulaires ————— */
+
+.field {
+  margin-bottom: 18px;
+}
+.field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.field input,
+.field select,
+.field textarea {
+  font: inherit;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-ctrl);
+  background: var(--surface);
+  color: var(--ink);
+}
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  border-color: var(--accent);
+}
+.field__hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+/* ————— Pages connexion / inscription ————— */
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+}
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--r-card);
+  padding: 36px 40px 32px;
+}
+.auth-card h1 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: -0.01em;
+  margin: 8px 0 12px;
+}
+.auth-card__lead {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 26px;
+}
+.auth-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 4px;
+}
+.auth-alert {
+  padding: 11px 14px;
+  border-radius: var(--r-ctrl);
+  font-size: 14px;
+  line-height: 1.55;
+  margin-bottom: 16px;
+  border: 1px solid;
+}
+.auth-alert--error {
+  color: #a5301f;
+  border-color: #e0b4ad;
+  background: #fdf1ef;
+}
+.auth-alert--ok {
+  color: var(--success);
+  border-color: var(--success);
+  background: var(--success-wash);
+}
+.auth-alert--warn {
+  color: var(--warn);
+  border-color: var(--warn);
+  background: var(--warn-wash);
+}
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ————— Compte ————— */
+
+.account-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 28px;
+  align-items: start;
+}
+.account-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: 26px 28px;
+}
+.account-card h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+.account-card__lead {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+.account-actions {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.account-footnote {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ————— Badges ————— */
+
+.badge-grid {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.badge-item {
+  display: flex;
+  gap: 14px;
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-ctrl);
+  background: var(--canvas);
+  opacity: 0.62;
+}
+.badge-item.is-earned {
+  opacity: 1;
+  background: var(--surface);
+  border-color: var(--accent);
+}
+.badge-item__medal {
+  flex: none;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--muted);
+}
+.badge-item.is-earned .badge-item__medal {
+  color: var(--accent);
+}
+.badge-item__body {
+  display: block;
+}
+.badge-item__label {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+}
+.badge-item__desc {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.badge-item__state {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.badge-item.is-earned .badge-item__state {
+  color: var(--success);
+}
+
+/* ————— En-tête : état de session ————— */
+
+.session-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.session-nav__name {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 18ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1080px) {
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .auth-card {
+    padding: 26px 22px 24px;
+  }
+  .auth-card h1 {
+    font-size: 25px;
+  }
+  .account-card {
+    padding: 20px;
+  }
+}
