@@ -227,6 +227,12 @@ export const risques: Course = {
               ],
             },
             {
+              type: 'chart',
+              chart: 'matrice-risques',
+              caption:
+                "Le chiffre de chaque case est le produit des deux cotations. Les seuils entre zones sont un choix d'organisation : ils se fixent au cadrage, avec le commanditaire.",
+            },
+            {
               type: 'p',
               text: "Le point décisif : définir les échelles avant de coter, en valeurs concrètes propres au projet. Sans cela, chaque participant projette sa propre idée de « majeur », et la matrice ne fait qu'habiller des intuitions. Avec des seuils chiffrés, la cotation devient un débat sur des faits (« quel décalage cela provoquerait-il réellement ? ») et non sur des ressentis.",
             },

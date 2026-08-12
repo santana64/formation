@@ -28,6 +28,7 @@ import './styles/pages.css';
 import './styles/features.css';
 import './styles/auth.css';
 import './styles/admin.css';
+import './styles/charts.css';
 
 const router = createBrowserRouter([
   {

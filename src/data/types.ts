@@ -5,7 +5,11 @@ export type Block =
   | { type: 'list'; ordered?: boolean; items: string[] }
   | { type: 'callout'; variant: 'repere' | 'terrain' | 'attention'; title: string; text: string }
   | { type: 'definition'; term: string; text: string }
-  | { type: 'table'; caption: string; head: string[]; rows: string[][] };
+  | { type: 'table'; caption: string; head: string[]; rows: string[][] }
+  /** Schéma explicatif rendu en SVG. Voir src/components/charts. */
+  | { type: 'chart'; chart: 'courbe-s' | 'valeur-acquise' | 'matrice-risques'; caption: string }
+  /** Exercice interactif. Voir src/components/exercises. */
+  | { type: 'exercise'; exercise: 'valeur-acquise' | 'van'; title: string };
 
 export interface Question {
   id: string;

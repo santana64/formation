@@ -52,6 +52,12 @@ export const depenses: Course = {
               text: "Un budget n'est pas seulement réparti par lot, il l'est aussi dans le temps : à chaque période, on sait ce qui devait être dépensé. Cette courbe cumulée — souvent appelée courbe en S à cause de sa forme, lente au démarrage, rapide au milieu, lente à la fin — constitue la référence. Sans elle, comparer le consommé à quoi que ce soit est impossible : dépenser 400 k€ au bout de six mois n'est ni bon ni mauvais tant qu'on ne sait pas ce qui était prévu à cette date.",
             },
             {
+              type: 'chart',
+              chart: 'courbe-s',
+              caption:
+                "La forme en S s'explique par le projet lui-même : peu de monde au démarrage le temps du cadrage, montée en charge pendant la production, puis décroissance pendant la recette et la clôture.",
+            },
+            {
               type: 'callout',
               variant: 'attention',
               title: 'Piège classique',
@@ -239,6 +245,12 @@ export const depenses: Course = {
               ],
             },
             {
+              type: 'chart',
+              chart: 'valeur-acquise',
+              caption:
+                "Les trois courbes du même exemple. L'écart de coût se lit verticalement entre coût réel et valeur acquise ; l'écart de délai entre valeur planifiée et valeur acquise.",
+            },
+            {
               type: 'p',
               text: "Cet exemple décrit un projet à la fois en retard et en dépassement — situation qu'un simple suivi budgétaire aurait masquée, puisque le consommé (210 k€) paraissait proche du prévu (200 k€). C'est exactement l'intérêt de la méthode : elle rend visible ce que la comparaison prévu/consommé dissimule.",
             },
@@ -269,7 +281,7 @@ export const depenses: Course = {
             { type: 'h2', text: 'Projeter le coût à terminaison' },
             {
               type: 'p',
-              text: "La projection la plus courante suppose que la performance observée se poursuivra : coût à terminaison = budget total ÷ IPC. Sur un projet budgété 500 k€ avec un IPC de 0,76, l'atterrissage se situe autour de 658 k€, soit un dépassement prévisible de plus de 30 %. Cette hypothèse est pessimiste si la cause de la dérive est ponctuelle et traitée ; elle est réaliste si la cause est structurelle — une sous-estimation initiale, par exemple, qui continuera de produire ses effets.",
+              text: "La projection la plus courante suppose que la performance observée se poursuivra : coût à terminaison = budget total ÷ IPC. Sur l'exemple précédent — 500 k€ budgétés, valeur acquise 160 k€ pour un coût réel de 210 k€ — l'atterrissage se situe autour de 656 k€, soit un dépassement prévisible de plus de 30 %. Cette hypothèse est pessimiste si la cause de la dérive est ponctuelle et traitée ; elle est réaliste si la cause est structurelle — une sous-estimation initiale, par exemple, qui continuera de produire ses effets.",
             },
             {
               type: 'list',
@@ -284,6 +296,11 @@ export const depenses: Course = {
               variant: 'attention',
               title: 'Piège classique',
               text: "Réestimer le reste-à-faire en conservant les hypothèses qui ont déjà été démenties. Si les six premiers mois ont coûté 30 % de plus que prévu pour des raisons qui n'ont pas disparu, annoncer que les six suivants tiendront le budget initial n'est pas une prévision : c'est un espoir. Les comités finissent toujours par s'en apercevoir, et la crédibilité du chef de projet ne s'en remet pas.",
+            },
+            {
+              type: 'exercise',
+              exercise: 'valeur-acquise',
+              title: 'À vous : calculez sur vos propres chiffres',
             },
             {
               type: 'callout',

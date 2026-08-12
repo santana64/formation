@@ -1,0 +1,244 @@
+/* ————— Schémas pédagogiques ————— */
+
+.chart-figure {
+  max-width: var(--prose-w);
+  margin: 28px 0;
+}
+.chart-figure figcaption {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: 8px;
+}
+
+.chart__grid {
+  stroke: var(--line-soft);
+  stroke-width: 1;
+}
+.chart__axis {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+.chart__marker {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+.chart__gap {
+  stroke: var(--warn);
+  stroke-width: 2;
+}
+.chart__tick {
+  fill: var(--muted);
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+.chart__label {
+  fill: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+.chart__annotation {
+  fill: var(--ink);
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+.chart__legend text {
+  fill: var(--muted);
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+
+.chart__line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.chart__area {
+  fill: var(--accent-wash);
+  stroke: none;
+}
+.chart__dot {
+  fill: var(--accent);
+}
+
+/* Les trois courbes se distinguent par le trait autant que par la couleur,
+   pour rester lisibles en impression et pour les daltoniens. */
+.chart__line--planned {
+  stroke: var(--muted);
+  stroke-dasharray: 7 5;
+}
+.chart__line--earned {
+  stroke: var(--accent);
+}
+.chart__line--cost {
+  stroke: var(--warn);
+  stroke-dasharray: 2 4;
+}
+.chart__dot--planned {
+  fill: var(--muted);
+}
+.chart__dot--earned {
+  fill: var(--accent);
+}
+.chart__dot--cost {
+  fill: var(--warn);
+}
+.chart__swatch--planned {
+  fill: var(--muted);
+}
+.chart__swatch--earned {
+  fill: var(--accent);
+}
+.chart__swatch--cost {
+  fill: var(--warn);
+}
+
+/* ————— Matrice de criticité ————— */
+
+.matrix__cell {
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+.matrix__cell--acceptable {
+  fill: var(--success-wash);
+}
+.matrix__cell--traiter {
+  fill: var(--warn-wash);
+}
+.matrix__cell--inacceptable {
+  fill: #f3dcd8;
+}
+.matrix__score {
+  fill: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ————— Exercices interactifs ————— */
+
+.exercise-figure {
+  max-width: var(--prose-w);
+  margin: 28px 0;
+}
+.exercise {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--r-card);
+  padding: 24px 26px;
+}
+.exercise__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.exercise__intro {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.exercise__inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.exercise__inputs .field {
+  margin-bottom: 0;
+}
+
+.exercise__results,
+.exercise__projection {
+  padding-top: 18px;
+}
+.exercise__projection {
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.exercise__projection h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+.exercise__projection > p {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.exercise__row {
+  display: grid;
+  grid-template-columns: 200px 110px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.exercise__row:last-child {
+  border-bottom: none;
+}
+.exercise__key {
+  font-size: 14px;
+  font-weight: 600;
+}
+.exercise__value {
+  font-size: 19px;
+  font-weight: 700;
+}
+/* L'état est porté par le libellé autant que par la couleur. */
+.exercise__value.is-bad {
+  color: var(--warn);
+}
+.exercise__value.is-good {
+  color: var(--success);
+}
+.exercise__read {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.exercise__alert {
+  margin-top: 18px;
+  padding: 13px 16px;
+  background: var(--warn-wash);
+  border-left: 3px solid var(--warn);
+  border-radius: 0 var(--r-ctrl) var(--r-ctrl) 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .exercise {
+    padding: 18px 16px;
+  }
+  .exercise__row {
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+  }
+  .exercise__read {
+    grid-column: 1 / -1;
+  }
+}
+
+@media print {
+  .exercise__inputs {
+    break-inside: avoid;
+  }
+  .chart {
+    border-color: var(--muted);
+  }
+}
