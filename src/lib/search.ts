@@ -29,6 +29,10 @@ function blockText(block: Block): string {
       return `${block.term} ${block.text}`;
     case 'table':
       return [block.caption, ...block.head, ...block.rows.flat()].join(' ');
+    case 'chart':
+      return block.caption;
+    case 'exercise':
+      return block.title;
   }
 }
 

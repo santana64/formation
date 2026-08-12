@@ -1,0 +1,274 @@
+/* ————————————————————————————————————————————————
+   FGF Campus — pages légales
+   Mentions légales, confidentialité, accessibilité.
+
+   Prose juridique : une colonne de lecture étroite (var(--prose-w)),
+   une hiérarchie de titres nette et beaucoup d'air. Aucune couleur
+   nouvelle : uniquement les tokens du design system.
+   ———————————————————————————————————————————————— */
+
+/* Le corps du texte s'appuie sur .prose (largeur, corps 17px, interlignage
+   1.7, titres h2 soulignés). .legal n'ajoute que ce qui manque à un texte
+   juridique : sous-titres, définitions et notes. */
+.legal h3 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  margin: 28px 0 8px;
+}
+.legal h3:first-child {
+  margin-top: 0;
+}
+.legal p + .legal-note,
+.legal-note {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-top: 14px;
+}
+.legal strong {
+  font-weight: 600;
+}
+
+/* Date de dernière mise à jour, sous le chapeau de page. */
+.legal-updated {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  max-width: var(--prose-w);
+}
+
+/* ————— Sommaire ————— */
+.legal-toc {
+  max-width: var(--prose-w);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r-card) var(--r-card) 0;
+  padding: 18px 22px;
+  margin-bottom: 40px;
+}
+.legal-toc h2 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+.legal-toc ol {
+  list-style: none;
+  counter-reset: legal-toc;
+  display: grid;
+  gap: 7px;
+}
+.legal-toc li {
+  counter-increment: legal-toc;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.legal-toc li::before {
+  content: counter(legal-toc) '.';
+  display: inline-block;
+  min-width: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ————— Champs restant à renseigner par FGF Consultant —————
+   Volontairement visible : une mention légale incomplète doit se voir,
+   pas se deviner. Le motif hachuré et le libellé en capitales portent
+   l'information ; la couleur seule ne signale jamais l'état. */
+.legal-todo {
+  background: var(--warn-wash);
+  border: 1px dashed var(--warn);
+  border-radius: var(--r-ctrl);
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.legal-todo__label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--warn);
+  margin-bottom: 5px;
+}
+.legal-todo__what {
+  font-weight: 600;
+}
+
+/* ————— Fiche d'identité (éditeur, responsable de traitement) ————— */
+.legal-facts {
+  max-width: var(--prose-w);
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.legal-facts > div {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 4px 24px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.legal-facts dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  padding-top: 3px;
+}
+.legal-facts dd {
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* ————— Les deux modes de fonctionnement du campus ————— */
+.legal-mode {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--r-card);
+  padding: 22px 24px;
+  margin-top: 20px;
+  max-width: var(--prose-w);
+}
+.legal-mode__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.legal-mode__head h3 {
+  margin: 0;
+}
+.legal-mode p + p,
+.legal-mode ul {
+  margin-top: 14px;
+}
+.legal-mode ul {
+  padding-left: 22px;
+}
+.legal-mode li + li {
+  margin-top: 8px;
+}
+.legal-mode li::marker {
+  color: var(--accent);
+}
+
+/* ————— Tableau des traitements ————— */
+.legal-table th[scope='row'] {
+  font-weight: 600;
+}
+.legal-table td,
+.legal-table th {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* ————— Encadré de contact en fin de page ————— */
+.legal-contact {
+  max-width: var(--prose-w);
+  margin-top: 40px;
+  padding: 24px 26px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--ink);
+  border-radius: var(--r-card);
+}
+.legal-contact h2 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+.legal-contact p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.legal-contact ul {
+  list-style: none;
+  margin-top: 14px;
+  display: grid;
+  gap: 6px;
+  font-size: 16px;
+}
+
+/* Renvois entre les trois pages légales. */
+.legal-cross {
+  max-width: var(--prose-w);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+}
+
+/* ————— Responsive ————— */
+@media (max-width: 760px) {
+  .legal-facts > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .legal-mode {
+    padding: 18px 18px;
+  }
+  .legal-toc,
+  .legal-contact {
+    padding: 16px 18px;
+  }
+
+  /* Comme le tableau de bord : sous 760 px, le tableau des traitements
+     devient une pile de cartes plutôt qu'un tableau à faire défiler. */
+  .legal .table-scroll {
+    overflow-x: visible;
+    border: none;
+    background: none;
+  }
+  .legal-table,
+  .legal-table tbody,
+  .legal-table tr,
+  .legal-table td,
+  .legal-table th {
+    display: block;
+  }
+  .legal-table thead {
+    display: none;
+  }
+  .legal-table caption {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .legal-table tr {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    margin-bottom: 12px;
+    padding: 6px 4px 10px;
+  }
+  .legal-table th[scope='row'] {
+    font-family: var(--font-display);
+    font-size: 17px;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 10px;
+  }
+  .legal-table td {
+    display: grid;
+    gap: 2px;
+    border-bottom: none;
+    padding: 8px 18px;
+  }
+  .legal-table td::before {
+    content: attr(data-label);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+}

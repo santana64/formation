@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && vite-node scripts/sitemap.ts",
+    "build": "tsc -b && vite build && vite-node scripts/sitemap.ts && vite-node scripts/precache.ts",
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run",

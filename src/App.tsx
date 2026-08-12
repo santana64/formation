@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { company } from './data/company';
 import { useAuth } from './lib/auth';
+import OfflineBanner from './components/OfflineBanner';
 
 /**
  * À chaque changement de page, remonte en haut et déplace le focus sur la zone
@@ -94,6 +95,8 @@ export default function App() {
         <Outlet />
       </main>
 
+      <OfflineBanner />
+
       <footer className="site-footer">
         <div className="wrap">
           <div className="site-footer__grid">
@@ -142,8 +145,8 @@ export default function App() {
             FGF Consultant — {company.legal.forme} au capital de {company.legal.capital}, {company.legal.rcs},
             SIREN {company.legal.siren}. Convention collective {company.legal.convention}.
             <br />
-            FGF Campus est la plateforme pédagogique de FGF Consultant. Aucune donnée de progression ne quitte votre
-            appareil.
+            <Link to="/mentions-legales">Mentions légales</Link> · <Link to="/confidentialite">Confidentialité</Link>{' '}
+            · <Link to="/accessibilite">Accessibilité</Link>
           </p>
         </div>
       </footer>

@@ -12,6 +12,15 @@
     <meta name="theme-color" content="#03045e" />
     <link rel="canonical" href="https://campus.fgfconsultant.fr/" />
 
+    <!-- Application installable et consultable hors ligne : le service worker
+         est enregistré depuis src/lib/offline.ts, en production uniquement. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="application-name" content="FGF Campus" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="FGF Campus" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="FGF Campus" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,6 +38,10 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2303045e'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='17' font-weight='700' fill='%23fff' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E"
     />
+    <!-- Le favicon reste en data-URI (zéro requête) ; /icon.svg sert à
+         l'installation et à l'écran d'accueil. -->
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    <link rel="mask-icon" href="/icon.svg" color="#03045e" />
   </head>
   <body>
     <div id="root"></div>

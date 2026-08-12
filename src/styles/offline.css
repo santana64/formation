@@ -1,0 +1,116 @@
+/* ————————————————————————————————————————————————
+   Bannière hors ligne / mise à jour
+   Voir src/components/OfflineBanner.tsx
+   ———————————————————————————————————————————————— */
+
+/* Le conteneur reste monté en permanence (région live). Tant qu'il est vide,
+   il ne doit ni s'afficher ni intercepter le pointeur. */
+.offline-banner {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 60; /* au-dessus de .site-header (50) */
+  max-width: min(420px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.offline-banner__card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--muted);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-menu);
+  pointer-events: auto;
+  animation: offline-banner-in 180ms ease-out;
+}
+
+@keyframes offline-banner-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.offline-banner__icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: var(--muted);
+}
+
+.offline-banner__text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.offline-banner__text strong {
+  display: block;
+  font-weight: 600;
+}
+
+/* Hors ligne : ton d'information, pas d'alerte. L'état est porté par le mot
+   « Hors ligne » et par l'icône, la couleur ne fait que l'accompagner. */
+.offline-banner__card--offline {
+  border-left-color: var(--warn);
+  background: var(--warn-wash);
+}
+.offline-banner__card--offline .offline-banner__icon {
+  color: var(--warn);
+}
+
+.offline-banner__card--update {
+  flex-wrap: wrap;
+  border-left-color: var(--accent);
+}
+.offline-banner__card--update .offline-banner__icon {
+  color: var(--accent);
+}
+
+.offline-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.offline-banner__apply {
+  padding: 7px 14px;
+  font-size: 14px;
+}
+
+.offline-banner__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-ctrl);
+  color: var(--muted);
+}
+.offline-banner__dismiss:hover {
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .offline-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
+  .offline-banner__actions {
+    margin-left: 30px;
+  }
+}
+
+@media print {
+  .offline-banner {
+    display: none;
+  }
+}

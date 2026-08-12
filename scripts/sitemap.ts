@@ -10,7 +10,18 @@ import { courses } from '../src/data';
  */
 const SITE_URL = (process.env.SITE_URL ?? 'https://campus.fgfconsultant.fr').replace(/\/$/, '');
 
-const paths = ['/', '/formations', '/recherche', '/progression', '/a-propos'];
+const paths = [
+  '/',
+  '/formations',
+  '/recherche',
+  '/revision',
+  '/entrainement',
+  '/progression',
+  '/a-propos',
+  '/mentions-legales',
+  '/confidentialite',
+  '/accessibilite',
+];
 
 for (const course of courses) {
   paths.push(`/formations/${course.id}`);
