@@ -32,39 +32,34 @@ export default function OrgLearners() {
     void (async () => {
       setLoading(true);
       try {
-        const { data: people, error: peopleError } = await supabase
-          .from('profiles')
-          .select('id, full_name, role')
-          .eq('organization_id', profile.organization_id ?? '');
-        if (peopleError) throw peopleError;
-
-        const ids = (people ?? []).map((p) => p.id as string);
-
-        const [{ data: progress }, { data: attempts }, { data: exams }, { data: org }] = await Promise.all([
-          supabase.from('lesson_progress').select('user_id').in('user_id', ids),
-          supabase.from('quiz_attempts').select('user_id, score, total').in('user_id', ids),
-          supabase.from('exam_attempts').select('user_id, passed').in('user_id', ids),
+        // Le détail des copies n'est pas accessible au référent : la base ne
+        // lui expose que ces compteurs, via une fonction dédiée.
+        const [{ data: rows, error: rowsError }, { data: org }] = await Promise.all([
+          supabase.rpc('org_learner_summary'),
           profile.organization_id
             ? supabase.from('organizations').select('name').eq('id', profile.organization_id).single()
             : Promise.resolve({ data: null }),
         ]);
+        if (rowsError) throw rowsError;
 
         setOrgName((org as { name?: string } | null)?.name ?? '');
 
         setLearners(
-          (people ?? []).map((p) => {
-            const uid = p.id as string;
-            return {
-              id: uid,
-              full_name: (p.full_name as string) || 'Sans nom',
-              role: p.role as string,
-              lessons: (progress ?? []).filter((r) => r.user_id === uid).length,
-              quizzesPassed: (attempts ?? []).filter(
-                (r) => r.user_id === uid && r.total > 0 && r.score / r.total >= 0.7,
-              ).length,
-              exams: (exams ?? []).filter((r) => r.user_id === uid && r.passed).length,
-            };
-          }),
+          ((rows ?? []) as {
+            user_id: string;
+            full_name: string;
+            role: string;
+            lessons_done: number;
+            quizzes_passed: number;
+            exams_passed: number;
+          }[]).map((r) => ({
+            id: r.user_id,
+            full_name: r.full_name || 'Sans nom',
+            role: r.role,
+            lessons: Number(r.lessons_done),
+            quizzesPassed: Number(r.quizzes_passed),
+            exams: Number(r.exams_passed),
+          })),
         );
       } catch (err) {
         setError(humanError(err instanceof Error ? err.message : String(err)));

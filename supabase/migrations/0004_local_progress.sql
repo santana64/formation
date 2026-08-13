@@ -19,3 +19,7 @@ alter table local_progress enable row level security;
 create policy progression_locale_soi on local_progress for all
   using (user_id = auth.uid())
   with check (user_id = auth.uid());
+
+-- 0002 a révoqué les privilèges par défaut du schéma : cette table étant créée
+-- après, elle doit accorder les siens explicitement.
+grant select, insert, update, delete on local_progress to authenticated;

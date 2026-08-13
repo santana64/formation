@@ -8,7 +8,11 @@
 -- refuser par défaut, puis ouvrir explicitement. Aucune policy ne fait confiance
 -- à une valeur envoyée par le client.
 
-create extension if not exists "pgcrypto";
+-- Sur Supabase, pgcrypto est déjà installée dans le schéma `extensions` :
+-- `if not exists` ne fait alors rien et l'extension n'atterrit pas dans `public`.
+-- Les appels doivent donc être qualifiés, faute de quoi la migration échoue sur
+-- « function gen_random_bytes(integer) does not exist ».
+create extension if not exists pgcrypto with schema extensions;
 
 -- ─────────────────────────────────────────────────────────────
 -- Types
@@ -40,7 +44,13 @@ create table profiles (
   organization_id uuid references organizations on delete set null,
   -- Nom tel qu'il doit figurer sur les attestations. Distinct de full_name car
   -- l'apprenant peut vouloir son nom d'état civil sur un document officiel.
+  -- Ce champ est repris tel quel sur un document vérifiable publiquement : on
+  -- le borne pour qu'il ne serve pas à y glisser un titre ou une mention.
   credential_name text,
+  constraint credential_name_raisonnable check (
+    credential_name is null
+    or (length(credential_name) between 2 and 80 and credential_name !~ '[[:cntrl:]]')
+  ),
   created_at timestamptz not null default now()
 );
 
@@ -54,7 +64,7 @@ create function handle_new_user()
 returns trigger
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 begin
   insert into public.profiles (id, full_name, role)
@@ -80,7 +90,7 @@ returns user_role
 language sql
 security definer
 stable
-set search_path = public
+set search_path = public, pg_temp
 as $$
   select role from public.profiles where id = auth.uid();
 $$;
@@ -90,7 +100,7 @@ returns boolean
 language sql
 security definer
 stable
-set search_path = public
+set search_path = public, pg_temp
 as $$
   select coalesce((select role from public.profiles where id = auth.uid()) = 'admin', false);
 $$;
@@ -100,9 +110,46 @@ returns uuid
 language sql
 security definer
 stable
-set search_path = public
+set search_path = public, pg_temp
 as $$
   select organization_id from public.profiles where id = auth.uid();
+$$;
+
+-- Les deux helpers suivants existent pour une raison précise : une policy qui
+-- interroge directement une autre table dont la policy interroge la première
+-- crée un cycle que PostgreSQL détecte à la réécriture de la requête, avant
+-- toute évaluation (« infinite recursion detected in policy »). Le cycle est
+-- structurel : aucune condition placée en amont ne le court-circuite. Passer
+-- par une fonction SECURITY DEFINER rompt la chaîne, car son corps s'exécute
+-- sans appliquer les policies.
+
+create function is_learner_of_current_trainer(p_profile uuid)
+returns boolean
+language sql
+security definer
+stable
+set search_path = public, pg_temp
+as $$
+  select exists (
+    select 1 from public.enrollments e
+    join public.courses c on c.id = e.course_id
+    where e.user_id = p_profile and c.author_id = auth.uid()
+  );
+$$;
+
+create function is_in_my_organization(p_profile uuid)
+returns boolean
+language sql
+security definer
+stable
+set search_path = public, pg_temp
+as $$
+  select exists (
+    select 1 from public.profiles p
+    where p.id = p_profile
+      and p.organization_id is not null
+      and p.organization_id = (select organization_id from public.profiles where id = auth.uid())
+  );
 $$;
 
 -- ─────────────────────────────────────────────────────────────
@@ -172,7 +219,13 @@ create table questions (
   answer int not null,
   explanation text not null default '',
   position int not null default 0,
-  constraint answer_dans_les_bornes check (answer >= 0 and answer < jsonb_array_length(choices))
+  -- jsonb_array_length lève une erreur sur autre chose qu'un tableau : on teste
+  -- d'abord le type, sinon le formateur reçoit un message incompréhensible.
+  constraint answer_dans_les_bornes check (
+    jsonb_typeof(choices) = 'array'
+    and answer >= 0
+    and answer < jsonb_array_length(choices)
+  )
 );
 
 create index on questions (module_id);
@@ -229,6 +282,22 @@ create table exams (
   constraint seuil_valide check (pass_threshold between 1 and 100)
 );
 
+-- Tirage d'une épreuve, conservé côté serveur.
+--
+-- Sans cette table, la correction ne peut porter que sur ce que le client
+-- renvoie : il lui suffit de soumettre une seule question juste pour obtenir
+-- 100 % et déclencher l'émission d'un certificat. Le tirage fait ici foi.
+create table exam_sessions (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references profiles on delete cascade,
+  exam_id uuid not null references exams on delete cascade,
+  question_ids jsonb not null,
+  started_at timestamptz not null default now(),
+  submitted_at timestamptz
+);
+
+create index on exam_sessions (user_id, exam_id);
+
 create table exam_attempts (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references profiles on delete cascade,
@@ -238,7 +307,8 @@ create table exam_attempts (
   passed boolean not null,
   duration_seconds int,
   detail jsonb not null default '{}'::jsonb,
-  taken_at timestamptz not null default now()
+  taken_at timestamptz not null default now(),
+  constraint exam_score_coherent check (score >= 0 and score <= total and total > 0)
 );
 
 create index on exam_attempts (user_id, exam_id);
@@ -276,7 +346,10 @@ create table user_badges (
 create table credentials (
   id uuid primary key default gen_random_uuid(),
   -- Code court vérifiable publiquement, sans exposer l'identifiant interne.
-  verification_code text not null unique default upper(substr(encode(gen_random_bytes(9), 'base64'), 1, 12)),
+  -- Le base64 produit « + » et « / », qui se transportent mal dans une URL de
+  -- vérification : on les remplace par des lettres.
+  verification_code text not null unique
+    default upper(translate(encode(extensions.gen_random_bytes(9), 'base64'), '+/=', 'XYZ')),
   kind credential_kind not null,
   user_id uuid not null references profiles on delete cascade,
   course_id uuid references courses on delete set null,
@@ -306,6 +379,7 @@ alter table enrollments enable row level security;
 alter table lesson_progress enable row level security;
 alter table quiz_attempts enable row level security;
 alter table exams enable row level security;
+alter table exam_sessions enable row level security;
 alter table exam_attempts enable row level security;
 alter table badges enable row level security;
 alter table user_badges enable row level security;
@@ -324,14 +398,7 @@ create policy profils_lecture_organisation on profiles for select
   );
 
 create policy profils_lecture_formateur on profiles for select
-  using (
-    current_role_of() = 'formateur'
-    and exists (
-      select 1 from enrollments e
-      join courses c on c.id = e.course_id
-      where e.user_id = profiles.id and c.author_id = auth.uid()
-    )
-  );
+  using (current_role_of() = 'formateur' and is_learner_of_current_trainer(profiles.id));
 
 create policy profils_lecture_admin on profiles for select using (is_admin());
 
@@ -347,7 +414,7 @@ create function protect_profile_privileges()
 returns trigger
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 begin
   if not public.is_admin() then
@@ -410,41 +477,54 @@ create policy questions_ecriture on questions for all
   with check (exists (select 1 from modules m join courses c on c.id = m.course_id
     where m.id = module_id and (c.author_id = auth.uid() or is_admin())));
 
--- Inscriptions et progression : l'apprenant est maître de ses données.
-create policy inscriptions_soi on enrollments for all
-  using (user_id = auth.uid()) with check (user_id = auth.uid());
+-- Inscriptions et progression.
+--
+-- L'apprenant lit ses données, mais n'écrit pas librement celles qui servent de
+-- preuve. Une policy « for all » couvre INSERT, UPDATE et DELETE : elle
+-- permettrait d'inscrire un score parfait dans quiz_attempts ou de poser soi-même
+-- completed_at sur une inscription, puis d'appeler issue_credential(), qui
+-- vérifie précisément ces lignes. Le certificat obtenu serait authentique en
+-- base et confirmé par verify_credential() à quiconque saisirait son code.
+-- L'écriture de ces tables passe donc exclusivement par les fonctions serveur.
+create policy inscriptions_lecture_soi on enrollments for select
+  using (user_id = auth.uid());
+create policy inscriptions_creation_soi on enrollments for insert
+  with check (user_id = auth.uid() and completed_at is null);
 create policy inscriptions_lecture_encadrants on enrollments for select
   using (
     is_admin()
     or exists (select 1 from courses c where c.id = course_id and c.author_id = auth.uid())
-    or (current_role_of() = 'referent_entreprise'
-        and exists (select 1 from profiles p where p.id = user_id
-                    and p.organization_id = current_organization()))
+    or (current_role_of() = 'referent_entreprise' and is_in_my_organization(user_id))
   );
 
-create policy progression_soi on lesson_progress for all
-  using (user_id = auth.uid()) with check (user_id = auth.uid());
+-- La progression de lecture reste déclarative : la fausser ne procure rien,
+-- puisque l'achèvement d'un parcours est constaté par une fonction serveur.
+create policy progression_lecture_soi on lesson_progress for select
+  using (user_id = auth.uid());
+create policy progression_ecriture_soi on lesson_progress for insert
+  with check (user_id = auth.uid());
+create policy progression_retrait_soi on lesson_progress for delete
+  using (user_id = auth.uid());
 create policy progression_lecture_encadrants on lesson_progress for select
   using (
     is_admin()
     or exists (select 1 from lessons l join modules m on m.id = l.module_id
                join courses c on c.id = m.course_id
                where l.id = lesson_id and c.author_id = auth.uid())
-    or (current_role_of() = 'referent_entreprise'
-        and exists (select 1 from profiles p where p.id = user_id
-                    and p.organization_id = current_organization()))
+    or (current_role_of() = 'referent_entreprise' and is_in_my_organization(user_id))
   );
 
-create policy tentatives_soi on quiz_attempts for all
-  using (user_id = auth.uid()) with check (user_id = auth.uid());
+create policy tentatives_lecture_soi on quiz_attempts for select
+  using (user_id = auth.uid());
+-- Le référent d'entreprise est volontairement absent de cette policy : le RLS
+-- s'applique à la ligne entière, pas colonne par colonne, et ces lignes portent
+-- le détail des réponses. L'interface lui promet des compteurs, pas des copies :
+-- il passe donc par org_learner_summary(), qui n'expose que des totaux.
 create policy tentatives_lecture_encadrants on quiz_attempts for select
   using (
     is_admin()
     or exists (select 1 from modules m join courses c on c.id = m.course_id
                where m.id = module_id and c.author_id = auth.uid())
-    or (current_role_of() = 'referent_entreprise'
-        and exists (select 1 from profiles p where p.id = user_id
-                    and p.organization_id = current_organization()))
   );
 
 -- Examens
@@ -454,15 +534,14 @@ create policy examens_ecriture on exams for all
   using ((current_role_of() in ('formateur', 'admin')) and (author_id = auth.uid() or is_admin()))
   with check ((current_role_of() in ('formateur', 'admin')) and (author_id = auth.uid() or is_admin()));
 
-create policy examens_tentatives_soi on exam_attempts for all
-  using (user_id = auth.uid()) with check (user_id = auth.uid());
+create policy examens_tentatives_lecture_soi on exam_attempts for select
+  using (user_id = auth.uid());
+-- Même raison que pour quiz_attempts : la colonne `detail` contient l'énoncé,
+-- la réponse donnée et la bonne réponse de chaque question.
 create policy examens_tentatives_encadrants on exam_attempts for select
   using (
     is_admin()
     or exists (select 1 from exams e where e.id = exam_id and e.author_id = auth.uid())
-    or (current_role_of() = 'referent_entreprise'
-        and exists (select 1 from profiles p where p.id = user_id
-                    and p.organization_id = current_organization()))
   );
 
 -- Badges : catalogue lisible par tous, attribution réservée au serveur.
