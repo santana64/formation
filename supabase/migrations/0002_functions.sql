@@ -11,7 +11,9 @@
 
 -- Renvoie les questions d'un module sans la bonne réponse ni l'explication.
 create function get_quiz(p_module_id uuid)
-returns table (id uuid, prompt text, choices jsonb, position int)
+-- « position » est un mot réservé PostgreSQL : il doit être cité pour nommer
+-- une colonne de retour, sans quoi la création de la fonction échoue.
+returns table (id uuid, prompt text, choices jsonb, "position" int)
 language sql
 security definer
 stable
