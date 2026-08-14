@@ -128,7 +128,7 @@ export const estimation: Course = {
         title: "QCM — Les méthodes d'estimation",
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-methodes-estimation-q1',
             prompt: 'En phase d’opportunité, seul l’objectif du projet est connu. Quelle méthode employer ?',
             choices: [
               'L’estimation détaillée ascendante, pour être précis dès le départ',
@@ -141,7 +141,7 @@ export const estimation: Course = {
               'L’analogie est la seule méthode praticable quand la connaissance se limite à l’objectif. Le détaillé ascendant exigerait un découpage complet qui n’existe pas encore — et produirait une précision illusoire.',
           },
           {
-            id: 'q2',
+            id: 'qcm-methodes-estimation-q2',
             prompt: 'Pourquoi détailler ligne par ligne un projet au périmètre encore flou est-il dangereux ?',
             choices: [
               'Parce que cela prend du temps',
@@ -154,7 +154,7 @@ export const estimation: Course = {
               'Le détail crée une précision apparente : le lecteur accorde au chiffre une confiance que la connaissance disponible ne justifie pas. La méthode doit rester en rapport avec la maturité réelle du projet.',
           },
           {
-            id: 'q3',
+            id: 'qcm-methodes-estimation-q3',
             prompt: 'Sur quoi repose une estimation paramétrique ?',
             choices: [
               'Sur l’avis d’un expert unique',
@@ -167,7 +167,7 @@ export const estimation: Course = {
               'Coût au mètre carré, à la tonne, au point de fonction : la paramétrique relie une grandeur physique ou fonctionnelle au coût, à partir d’un historique. Elle permet en outre des analyses de sensibilité.',
           },
           {
-            id: 'q4',
+            id: 'qcm-methodes-estimation-q4',
             prompt: 'Quelle information d’une base de données de coûts est la plus précieuse et la plus souvent perdue ?',
             choices: [
               'Le nom du chef de projet',
@@ -180,7 +180,7 @@ export const estimation: Course = {
               'L’écart expliqué est ce qui permet de corriger les biais d’estimation de l’organisation. C’est aussi ce que personne n’a envie de documenter à la clôture, quand l’équipe est déjà passée au projet suivant.',
           },
           {
-            id: 'q5',
+            id: 'qcm-methodes-estimation-q5',
             prompt: 'La fourchette d’une estimation reste identique entre l’opportunité et le lancement. Qu’en conclure ?',
             choices: [
               'L’estimation initiale était excellente',
@@ -302,7 +302,7 @@ export const estimation: Course = {
         title: 'QCM — Évaluer la rentabilité',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-rentabilite-q1',
             prompt: 'Pourquoi actualiser les flux futurs d’un projet ?',
             choices: [
               'Pour tenir compte de l’inflation uniquement',
@@ -315,7 +315,7 @@ export const estimation: Course = {
               'L’argent disponible aujourd’hui peut être placé, porte moins de risque et n’a pas subi l’érosion monétaire. L’actualisation ramène tous les flux à une même date pour les rendre comparables.',
           },
           {
-            id: 'q2',
+            id: 'qcm-rentabilite-q2',
             prompt: 'Que signifie une VAN positive ?',
             choices: [
               'Le projet sera livré dans les délais',
@@ -328,7 +328,7 @@ export const estimation: Course = {
               'La VAN compare les flux actualisés à l’investissement : positive, elle indique que le projet rapporte davantage que l’exigence de rentabilité représentée par le taux. Des gains bruts supérieurs à l’investissement ne suffisent pas à le garantir.',
           },
           {
-            id: 'q3',
+            id: 'qcm-rentabilite-q3',
             prompt: 'Un investissement de 300 k€ rapporte 450 k€ bruts sur quatre ans. Après actualisation à 8 %, la VAN tombe à 70 k€. Comment interpréter ?',
             choices: [
               'Le calcul est erroné, la VAN devrait être de 150 k€',
@@ -341,7 +341,7 @@ export const estimation: Course = {
               'L’actualisation déprécie les gains lointains. La VAN reste positive — le projet crée de la valeur — mais la marge réelle est bien inférieure à ce que laissait croire la différence brute de 150 k€.',
           },
           {
-            id: 'q4',
+            id: 'qcm-rentabilite-q4',
             prompt: 'Une baisse de 10 % du gain annuel annule la VAN. Que conclure ?',
             choices: [
               'Le projet est très rentable',
@@ -354,7 +354,7 @@ export const estimation: Course = {
               'L’analyse de sensibilité sert exactement à cela : identifier les hypothèses qui font basculer la décision. Une rentabilité qui disparaît avec 10 % d’écart doit être annoncée comme fragile, pas présentée comme acquise.',
           },
           {
-            id: 'q5',
+            id: 'qcm-rentabilite-q5',
             prompt: 'Comment traiter les bénéfices non monétaires (conformité, sécurité, image) ?',
             choices: [
               'Les chiffrer artificiellement pour les intégrer à la VAN',
@@ -367,7 +367,7 @@ export const estimation: Course = {
               'Les chiffrer artificiellement décrédibilise l’analyse ; les taire prive le décideur d’éléments souvent déterminants. La présentation séparée préserve la rigueur du calcul et l’intégralité de l’information.',
           },
           {
-            id: 'q6',
+            id: 'qcm-rentabilite-q6',
             prompt: 'Quel signe trahit une étude de rentabilité construite pour justifier une décision déjà prise ?',
             choices: [
               'La présence de trois scénarios cohérents',

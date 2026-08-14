@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Quiz } from '../data/types';
 import { saveQuizResult } from '../lib/progress';
+import { shuffleChoices } from '../lib/shuffle';
+import { recordRight, recordWrong } from '../lib/review';
 
 interface Props {
   quiz: Quiz;
@@ -27,9 +29,22 @@ export default function QuizEngine({ quiz, courseId, moduleId, onFinished }: Pro
     if (submitted) resultRef.current?.focus();
   }, [submitted]);
 
-  const total = quiz.questions.length;
+  // Les propositions sont mélangées de façon déterministe : sans cela, la bonne
+  // réponse se trouvait presque toujours en deuxième position et le QCM était
+  // soluble sans connaître le sujet. L'ordre reste stable d'un affichage à
+  // l'autre, une question revue en révision se présente donc à l'identique.
+  const questions = useMemo(
+    () =>
+      quiz.questions.map((q) => {
+        const { choices, answer } = shuffleChoices(`${quiz.id}/${q.id}`, q.choices, q.answer);
+        return { ...q, choices, answer };
+      }),
+    [quiz],
+  );
+
+  const total = questions.length;
   const answered = Object.keys(answers).length;
-  const score = quiz.questions.filter((q) => answers[q.id] === q.answer).length;
+  const score = questions.filter((q) => answers[q.id] === q.answer).length;
 
   function select(questionId: string, choiceIndex: number) {
     if (submitted) return;
@@ -44,6 +59,14 @@ export default function QuizEngine({ quiz, courseId, moduleId, onFinished }: Pro
     }
     setSubmitted(true);
     saveQuizResult(courseId, moduleId, score, total);
+
+    // Alimente la file de révision : sans cela, la page /revision reste vide
+    // alors qu'elle annonce reprendre « chaque question ratée dans un QCM ».
+    for (const q of questions) {
+      if (answers[q.id] === q.answer) recordRight(courseId, moduleId, q.id);
+      else recordWrong(courseId, moduleId, q.id);
+    }
+
     onFinished?.(score, total);
     window.scrollTo({ top: 0 });
   }
@@ -85,7 +108,7 @@ export default function QuizEngine({ quiz, courseId, moduleId, onFinished }: Pro
       )}
 
       <ol className="quiz__questions">
-        {quiz.questions.map((q, qi) => {
+        {questions.map((q, qi) => {
           const chosen = answers[q.id];
           const missing = showMissing && chosen === undefined;
           return (

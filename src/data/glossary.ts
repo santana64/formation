@@ -559,7 +559,7 @@ export const glossary: GlossaryEntry[] = [
   {
     id: 'delai-de-recuperation',
     term: 'Délai de récupération',
-    aliases: ['payback', 'retour sur investissement'],
+    aliases: ['payback', 'délai de récupération actualisé'],
     definition:
       'Date à laquelle le cumul des flux actualisés redevient positif, c’est-à-dire le moment où l’organisation a récupéré sa mise. Complète la VAN, qui dit si le projet crée de la valeur mais pas quand. Décisif pour une organisation contrainte en trésorerie ou opérant dans un environnement instable.',
     category: 'Coûts',

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { glossary, glossaryCategories, type GlossaryCategory } from '../data/glossary';
+import { getLessonRef } from '../data';
 import { usePageMeta } from '../lib/meta';
 
 /** Même normalisation que la recherche du site : « delai » trouve « délai ». */
@@ -143,14 +144,22 @@ export default function Glossary() {
                     {entry.lessons.length > 0 && (
                       <p className="glossary-entry__links">
                         <span className="glossary-entry__label">Traité dans</span>
-                        {entry.lessons.map((l, i) => (
-                          <span key={`${l.courseId}/${l.lessonId}`}>
-                            {i > 0 && ' · '}
-                            <Link to={`/formations/${l.courseId}/modules/${l.moduleId}/lecons/${l.lessonId}`}>
-                              la leçon correspondante
-                            </Link>
-                          </span>
-                        ))}
+                        {/* Le titre réel de la leçon, et non un libellé
+                            générique : plusieurs entrées renvoient vers deux ou
+                            trois leçons différentes, que des liens identiques
+                            rendraient indiscernables — y compris au lecteur
+                            d'écran, qui les énumère hors contexte. */}
+                        {entry.lessons.map((l, i) => {
+                          const ref = getLessonRef(l.courseId, l.moduleId, l.lessonId);
+                          return (
+                            <span key={`${l.courseId}/${l.lessonId}`}>
+                              {i > 0 && ' · '}
+                              <Link to={`/formations/${l.courseId}/modules/${l.moduleId}/lecons/${l.lessonId}`}>
+                                {ref ? ref.lesson.title : 'la leçon correspondante'}
+                              </Link>
+                            </span>
+                          );
+                        })}
                       </p>
                     )}
 

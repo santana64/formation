@@ -125,7 +125,7 @@ export const fondamentaux: Course = {
         title: 'QCM — Cadrer le projet',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-cadrer-q1',
             prompt: 'Parmi ces activités, laquelle relève d’un projet ?',
             choices: [
               'Traiter les factures fournisseurs chaque fin de mois',
@@ -138,7 +138,7 @@ export const fondamentaux: Course = {
               'Le déploiement d’un nouveau logiciel est temporaire (il a une fin) et unique (il n’a jamais été fait dans ce contexte) : c’est un projet. Les trois autres activités sont récurrentes — ce sont des opérations.',
           },
           {
-            id: 'q2',
+            id: 'qcm-cadrer-q2',
             prompt: 'Quelles sont les trois contraintes du « triangle » du projet ?',
             choices: [
               'Qualité, communication, ressources humaines',
@@ -151,7 +151,7 @@ export const fondamentaux: Course = {
               'Le triangle contenu (périmètre/qualité) – délai – coût représente la tension fondamentale : modifier l’une des contraintes affecte mécaniquement les deux autres.',
           },
           {
-            id: 'q3',
+            id: 'qcm-cadrer-q3',
             prompt: 'Quel est le rôle premier du commanditaire (sponsor) ?',
             choices: [
               'Rédiger le planning détaillé du projet',
@@ -164,7 +164,7 @@ export const fondamentaux: Course = {
               'Le commanditaire porte le besoin et détient l’autorité de décision. Le planning et l’animation d’équipe relèvent du chef de projet ; la production des livrables relève de l’équipe.',
           },
           {
-            id: 'q4',
+            id: 'qcm-cadrer-q4',
             prompt: 'Dans une charte de projet, à quoi sert la liste des exclusions de périmètre ?',
             choices: [
               'À allonger le document pour le rendre plus complet',
@@ -177,7 +177,7 @@ export const fondamentaux: Course = {
               'Les exclusions explicites protègent le projet contre la dérive du périmètre : ce qui est écrit comme « hors périmètre » ne pourra pas être exigé plus tard sans renégociation formelle.',
           },
           {
-            id: 'q5',
+            id: 'qcm-cadrer-q5',
             prompt: 'Un objectif de projet bien formulé est…',
             choices: [
               '« Améliorer la satisfaction client »',
@@ -217,7 +217,7 @@ export const fondamentaux: Course = {
             { type: 'h2', text: 'Jusqu’où découper ?' },
             {
               type: 'p',
-              text: "Trop gros, un lot est impilotables : « développer le module client — 60 jours » ne permet aucun suivi avant deux mois. Trop fin, le découpage devient une usine à gaz administrative. Repère pratique : un lot de travail terminal devrait représenter entre 1 et 10 jours d'effort, avoir un responsable unique et un critère d'achèvement vérifiable (la « définition de fini »).",
+              text: "Trop gros, un lot est impossible à piloter : « développer le module client — 60 jours » ne permet aucun suivi avant deux mois. Trop fin, le découpage devient une usine à gaz administrative. Repère pratique : un lot de travail terminal devrait représenter entre 1 et 10 jours d'effort, avoir un responsable unique et un critère d'achèvement vérifiable (la « définition de fini »).",
             },
             {
               type: 'callout',
@@ -284,7 +284,7 @@ export const fondamentaux: Course = {
         title: 'QCM — Organiser et planifier',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-planifier-q1',
             prompt: 'Que garantit la « règle des 100 % » dans un WBS ?',
             choices: [
               'Que le projet sera livré à 100 % dans les délais',
@@ -297,7 +297,7 @@ export const fondamentaux: Course = {
               'La règle des 100 % est une règle de complétude du découpage : la somme des lots enfants représente exactement le travail du niveau parent. Elle ne dit rien des délais, des affectations ni du budget.',
           },
           {
-            id: 'q2',
+            id: 'qcm-planifier-q2',
             prompt: 'Quelle est la bonne maille pour un lot de travail terminal ?',
             choices: [
               'Moins d’une heure, pour un suivi très fin',
@@ -310,7 +310,7 @@ export const fondamentaux: Course = {
               'La maille 1–10 jours permet un suivi régulier sans bureaucratie. Un responsable unique et une « définition de fini » rendent le lot pilotable.',
           },
           {
-            id: 'q3',
+            id: 'qcm-planifier-q3',
             prompt: 'Une tâche du chemin critique prend 2 jours de retard. Quelle est la conséquence directe ?',
             choices: [
               'Aucune, sa marge absorbe le retard',
@@ -323,7 +323,7 @@ export const fondamentaux: Course = {
               'Par définition, les tâches du chemin critique n’ont aucune marge : tout retard se répercute intégralement sur la date de fin du projet.',
           },
           {
-            id: 'q4',
+            id: 'qcm-planifier-q4',
             prompt: 'Pourquoi estimer les charges en fourchette (optimiste / probable / pessimiste) ?',
             choices: [
               'Pour rendre l’incertitude visible et en tenir compte dans le planning',
@@ -336,7 +336,7 @@ export const fondamentaux: Course = {
               'La fourchette exprime l’incertitude de l’estimation : un écart large signale un travail mal connu qui mérite d’être creusé ou provisionné. Une valeur unique donne une illusion de précision.',
           },
           {
-            id: 'q5',
+            id: 'qcm-planifier-q5',
             prompt: 'La date exigée par le client est incompatible avec vos estimations. Que faites-vous ?',
             choices: [
               'Vous compressez les durées du planning jusqu’à atteindre la date',
@@ -440,7 +440,7 @@ export const fondamentaux: Course = {
         title: 'QCM — Piloter l’exécution',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-piloter-q1',
             prompt: 'Pourquoi l’avancement déclaratif (« je suis à 80 % ») est-il trompeur ?',
             choices: [
               'Parce que les équipes mentent systématiquement',
@@ -453,7 +453,7 @@ export const fondamentaux: Course = {
               'Les « derniers 20 % » (intégration, corrections, validations) révèlent les problèmes accumulés. C’est pourquoi on mesure les lots réellement terminés et on réestime le reste-à-faire, plutôt que de collecter des pourcentages déclarés.',
           },
           {
-            id: 'q2',
+            id: 'qcm-piloter-q2',
             prompt: 'Le projet a consommé 60 % du budget pour 30 % de lots terminés. Que conclure ?',
             choices: [
               'Tout va bien tant qu’il reste du budget',
@@ -466,7 +466,7 @@ export const fondamentaux: Course = {
               'Rapprocher consommation et avancement physique révèle la dérive : ici, le coût à terminaison projeté est le double du budget. Cela exige une analyse de cause et un arbitrage — pas nécessairement un arrêt, mais sûrement pas le silence.',
           },
           {
-            id: 'q3',
+            id: 'qcm-piloter-q3',
             prompt: 'Dans la matrice pouvoir/intérêt, comment gérer un acteur à fort pouvoir mais faible intérêt pour le projet ?',
             choices: [
               'L’ignorer puisqu’il ne s’intéresse pas au projet',
@@ -479,7 +479,7 @@ export const fondamentaux: Course = {
               'Un acteur puissant mais peu intéressé peut bloquer le projet s’il est contrarié. On le maintient satisfait par une communication ciblée de haut niveau, sans chercher à l’impliquer dans le quotidien.',
           },
           {
-            id: 'q4',
+            id: 'qcm-piloter-q4',
             prompt: 'Quel est le rôle propre du comité de pilotage ?',
             choices: [
               'Passer en revue le détail technique des livrables',
@@ -492,7 +492,7 @@ export const fondamentaux: Course = {
               'Le comité de pilotage est l’instance de décision : arbitrages de périmètre, de ressources et de calendrier. Le détail opérationnel se traite dans les instances d’équipe et de projet.',
           },
           {
-            id: 'q5',
+            id: 'qcm-piloter-q5',
             prompt: 'Un indicateur de votre tableau de bord passe à l’orange. Quelle est la suite correcte ?',
             choices: [
               'Le signaler dans le compte rendu et attendre le mois suivant',
@@ -560,7 +560,7 @@ export const fondamentaux: Course = {
         title: 'QCM — Clôturer et capitaliser',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-cloturer-q1',
             prompt: 'Que comprend une clôture de projet complète ?',
             choices: [
               'Uniquement un pot de départ avec l’équipe',
@@ -573,7 +573,7 @@ export const fondamentaux: Course = {
               'La clôture est une phase à part entière : acceptation formelle des livrables, transfert (documentation, formation, support), libération des ressources, solde financier et REX.',
           },
           {
-            id: 'q2',
+            id: 'qcm-cloturer-q2',
             prompt: 'Pourquoi la mesure des bénéfices doit-elle être planifiée dès la clôture ?',
             choices: [
               'Parce qu’elle intervient après la fin du projet et qu’elle n’aura pas lieu sans responsable désigné',
@@ -586,7 +586,7 @@ export const fondamentaux: Course = {
               'Les bénéfices réels (gains de délai, économies, adoption) se constatent des semaines ou mois après la mise en service. Sans rendez-vous planifié et sans responsable, personne ne mesure — et l’organisation ne sait pas si le projet a réussi.',
           },
           {
-            id: 'q3',
+            id: 'qcm-cloturer-q3',
             prompt: 'Quelle règle d’animation est essentielle pour un atelier de retour d’expérience ?',
             choices: [
               'Identifier les coupables des retards pour les sanctionner',
@@ -599,7 +599,7 @@ export const fondamentaux: Course = {
               'Si le REX cherche des coupables, les participants se protègent et l’information disparaît. On analyse les faits et les causes pour produire des enseignements actionnables.',
           },
           {
-            id: 'q4',
+            id: 'qcm-cloturer-q4',
             prompt: 'Lequel de ces énoncés est un enseignement REX correctement formulé ?',
             choices: [
               '« Il faut mieux communiquer »',

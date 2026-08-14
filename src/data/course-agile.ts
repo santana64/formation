@@ -111,7 +111,7 @@ export const agile: Course = {
         title: 'QCM — L’état d’esprit agile',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-esprit-agile-q1',
             prompt: 'Que signifie le « plutôt que » des quatre valeurs du Manifeste agile ?',
             choices: [
               'Les éléments de droite (processus, documentation, contrat, plan) sont interdits',
@@ -124,7 +124,7 @@ export const agile: Course = {
               'Le Manifeste exprime des préférences hiérarchisées : « nous reconnaissons la valeur des seconds éléments, mais privilégions les premiers ». Être agile sans aucune documentation ni plan est un contresens.',
           },
           {
-            id: 'q2',
+            id: 'qcm-esprit-agile-q2',
             prompt: 'Dans quel contexte l’approche prédictive (waterfall) reste-t-elle pertinente ?',
             choices: [
               'Quand le besoin est incertain et évolutif',
@@ -137,7 +137,7 @@ export const agile: Course = {
               'Le prédictif excelle quand la spécification initiale peut être fiable : besoin stable, domaine connu, contraintes réglementaires fortes. L’agile répond au contexte inverse — l’incertitude.',
           },
           {
-            id: 'q3',
+            id: 'qcm-esprit-agile-q3',
             prompt: 'Quel est le mécanisme central par lequel l’agilité réduit le risque ?',
             choices: [
               'La suppression de la documentation',
@@ -150,7 +150,7 @@ export const agile: Course = {
               'Le cœur de l’agilité est la boucle : livrer un incrément utilisable, le confronter au réel, apprendre, ajuster. Les erreurs sont découvertes tôt, quand elles coûtent encore peu. Les rituels ne sont que des supports de cette boucle.',
           },
           {
-            id: 'q4',
+            id: 'qcm-esprit-agile-q4',
             prompt: 'Qu’est-ce qui caractérise une « agilité alibi » ?',
             choices: [
               'Des itérations courtes avec démonstrations aux utilisateurs',
@@ -163,7 +163,7 @@ export const agile: Course = {
               'Le signe distinctif est l’absence de boucle de feedback : périmètre figé, validation uniquement en fin de projet, équipe sans autonomie. Les trois autres réponses décrivent au contraire une agilité réelle.',
           },
           {
-            id: 'q5',
+            id: 'qcm-esprit-agile-q5',
             prompt: 'Dans une user story, quelle est la partie la plus utile à l’équipe ?',
             choices: [
               'Le rôle (« en tant que… »)',
@@ -176,7 +176,7 @@ export const agile: Course = {
               'Connaître le bénéfice recherché autorise l’équipe à proposer une réponse différente et plus efficace que la solution imaginée par le demandeur. Sans le « afin de », la story n’est qu’une commande à exécuter.',
           },
           {
-            id: 'q6',
+            id: 'qcm-esprit-agile-q6',
             prompt: 'Pourquoi n’affine-t-on que le haut du backlog ?',
             choices: [
               'Parce que le bas du backlog est réservé au commanditaire',
@@ -209,7 +209,7 @@ export const agile: Course = {
               type: 'list',
               items: [
                 "Product Owner : responsable de maximiser la valeur du produit. Il ordonne le backlog, tranche les priorités et représente les utilisateurs et parties prenantes. Un PO par produit, avec un vrai mandat.",
-                "Développeurs : l'équipe pluridisciplinaire (3 à 9 personnes en pratique) qui transforme le backlog en incrément utilisable. Elle s'auto-organise sur le « comment ».",
+                "Développeurs : l'équipe pluridisciplinaire (l'équipe Scrum complète compte typiquement dix personnes ou moins) qui transforme le backlog en incrément utilisable. Elle s'auto-organise sur le « comment ».",
                 "Scrum Master : garant du cadre et de son efficacité. Il lève les obstacles, protège l'équipe des interruptions et aide l'organisation à comprendre Scrum. Ce n'est ni un chef de projet renommé, ni un secrétaire de réunion.",
               ],
             },
@@ -291,7 +291,7 @@ export const agile: Course = {
         title: 'QCM — Scrum en pratique',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-scrum-q1',
             prompt: 'Qui ordonne le product backlog ?',
             choices: ['Le Scrum Master', 'Le Product Owner', 'Les développeurs', 'Le commanditaire du projet'],
             answer: 1,
@@ -299,7 +299,7 @@ export const agile: Course = {
               'Le Product Owner est responsable de maximiser la valeur : il ordonne le backlog et tranche les priorités. Les développeurs décident du « comment » ; le Scrum Master veille à l’efficacité du cadre.',
           },
           {
-            id: 'q2',
+            id: 'qcm-scrum-q2',
             prompt: 'Quelle est la fonction de la mêlée quotidienne (daily scrum) ?',
             choices: [
               'Faire un reporting d’avancement au manager',
@@ -312,7 +312,7 @@ export const agile: Course = {
               'La mêlée appartient aux développeurs : ils s’y coordonnent entre eux. Dès qu’elle devient un reporting au chef, elle perd sa fonction — et souvent sa sincérité.',
           },
           {
-            id: 'q3',
+            id: 'qcm-scrum-q3',
             prompt: 'Pourquoi la « définition de fini » est-elle décisive dans Scrum ?',
             choices: [
               'Elle fixe la date de fin du projet',
@@ -325,7 +325,7 @@ export const agile: Course = {
               'Si « fini » signifie « codé mais ni testé ni intégré », l’incrément n’est pas utilisable et le feedback est illusoire. Une définition de fini exigeante et partagée est le garde-fou de toute la mécanique.',
           },
           {
-            id: 'q4',
+            id: 'qcm-scrum-q4',
             prompt: 'Une revue de sprint sans utilisateurs ni parties prenantes est problématique parce que…',
             choices: [
               'la réunion dure moins longtemps',
@@ -338,7 +338,7 @@ export const agile: Course = {
               'La revue existe pour confronter l’incrément au regard de ceux qui s’en serviront et en ajuster le backlog. Sans eux, on perd l’apprentissage — qui est la raison d’être des boucles courtes.',
           },
           {
-            id: 'q5',
+            id: 'qcm-scrum-q5',
             prompt: 'L’équipe termine 22 à 30 points par sprint et il reste 180 points. Que répondez-vous au commanditaire ?',
             choices: [
               '« Ce sera fini dans exactement 7 sprints »',
@@ -351,7 +351,7 @@ export const agile: Course = {
               'La vélocité observée sur plusieurs sprints donne une fourchette de projection. Communiquer la fourchette — et son resserrement attendu — est plus honnête et plus utile qu’une date unique fausse ou qu’un refus de répondre.',
           },
           {
-            id: 'q6',
+            id: 'qcm-scrum-q6',
             prompt: 'Pourquoi ne faut-il pas comparer la vélocité de deux équipes ?',
             choices: [
               'Parce que c’est interdit par le Guide Scrum',
@@ -477,7 +477,7 @@ export const agile: Course = {
         title: 'QCM — Choisir son approche',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-choisir-q1',
             prompt: 'Quel contexte plaide le plus fortement pour une approche agile ?',
             choices: [
               'Besoin parfaitement spécifié et technologies éprouvées',
@@ -490,7 +490,7 @@ export const agile: Course = {
               'L’agile crée de la valeur quand l’incertitude est forte et que la boucle de feedback est possible : incréments utilisables + utilisateurs accessibles. Les trois autres contextes favorisent le prédictif.',
           },
           {
-            id: 'q2',
+            id: 'qcm-choisir-q2',
             prompt: 'Dans un montage hybride typique, comment coexistent jalons et itérations ?',
             choices: [
               'Les jalons remplacent les itérations',
@@ -503,7 +503,7 @@ export const agile: Course = {
               'L’hybride honnête garde des points de rendez-vous contractuels tout en itérant entre eux — à condition que le montage soit explicite et que les incréments soient réellement montrés et testés.',
           },
           {
-            id: 'q3',
+            id: 'qcm-choisir-q3',
             prompt: 'Qu’est-ce qui caractérise un « faux hybride » ?',
             choices: [
               'Des démonstrations régulières au client',
@@ -516,7 +516,7 @@ export const agile: Course = {
               'Sans feedback client avant la recette finale, les sprints ne sont qu’une organisation interne du travail : on paie les rituels agiles sans en récolter l’apprentissage. C’est le cumul des coûts des deux mondes.',
           },
           {
-            id: 'q4',
+            id: 'qcm-choisir-q4',
             prompt: 'Sur un forfait ferme à périmètre figé, que peut réellement apporter l’itératif ?',
             choices: [
               'La liberté de changer le périmètre sans avenant',
@@ -529,7 +529,7 @@ export const agile: Course = {
               'À périmètre contractuellement figé, l’itératif ne redonne pas la flexibilité du contenu, mais il sécurise l’exécution : priorisation, intégration continue, détection précoce des écarts. Le dire au client évite les malentendus.',
           },
           {
-            id: 'q5',
+            id: 'qcm-choisir-q5',
             prompt: 'Quelle est la règle centrale du pilotage par le flux (Kanban) ?',
             choices: [
               'Tenir des sprints de deux semaines',
@@ -542,7 +542,7 @@ export const agile: Course = {
               'La limite d’encours est le régulateur du système : en démarrant moins de choses à la fois, l’équipe termine plus vite, réduit les changements de contexte et rend les blocages visibles au lieu de les contourner.',
           },
           {
-            id: 'q6',
+            id: 'qcm-choisir-q6',
             prompt: 'Une équipe reçoit chaque jour des incidents urgents et ne tient jamais son engagement de sprint. Que recommander ?',
             choices: [
               'Allonger les sprints à six semaines',

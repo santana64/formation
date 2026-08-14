@@ -1,8 +1,20 @@
 const probabilites = ['Rare', 'Possible', 'Probable', 'Quasi certain'];
 const impacts = ['Mineur', 'Modéré', 'Majeur', 'Critique'];
 
-/** Zone de criticité en fonction du produit probabilité × impact. */
+/**
+ * Zone de criticité.
+ *
+ * Le produit seul ne suffit pas : « Rare × Critique » vaut 4, comme
+ * « Quasi certain × Mineur », alors qu'un impact critique remet en cause
+ * l'objectif du projet. Le produit d'échelles ordinales sous-pondère
+ * systématiquement les événements rares à conséquence grave — c'est la limite
+ * connue des matrices multiplicatives (ISO 31010). D'où une règle de garde
+ * indépendante du produit, comme en sûreté, nucléaire ou aéronautique.
+ */
 function zone(p: number, i: number): 'acceptable' | 'traiter' | 'inacceptable' {
+  const impactCritique = i === impacts.length - 1;
+  if (impactCritique) return 'inacceptable';
+
   const score = (p + 1) * (i + 1);
   if (score <= 4) return 'acceptable';
   if (score <= 9) return 'traiter';
@@ -30,7 +42,9 @@ export default function MatriceRisques() {
         Matrice de criticité à seize cases croisant quatre niveaux de probabilité (rare, possible, probable, quasi
         certain) et quatre niveaux d’impact (mineur, modéré, majeur, critique). Les combinaisons faibles sont
         acceptables et se surveillent ; les combinaisons intermédiaires exigent un plan d’action ; les combinaisons
-        fortes, en haut à droite, sont inacceptables et imposent une action immédiate ou une escalade.
+        fortes sont inacceptables et imposent une action immédiate ou une escalade. Toute la colonne « critique » est
+        classée inacceptable, quelle que soit la probabilité : un événement rare qui remet en cause l’objectif du
+        projet se traite, il ne se surveille pas.
       </desc>
 
       {probabilites.map((_, p) =>
@@ -99,7 +113,6 @@ export default function MatriceRisques() {
       <g className="chart__legend">
         {(['acceptable', 'traiter', 'inacceptable'] as const).map((z, idx) => (
           <g key={z}>
-            <rect x={originX} y={440 + idx * 0} width="0" height="0" />
             <rect x={20 + idx * 200} y={456} width="13" height="13" rx="2" className={`matrix__cell matrix__cell--${z}`} />
             <text x={40 + idx * 200} y={466}>
               {zoneLabels[z].split(' — ')[0]}

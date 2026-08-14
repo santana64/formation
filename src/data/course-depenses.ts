@@ -134,7 +134,7 @@ export const depenses: Course = {
         title: 'QCM — Budget et référence',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-budget-reference-q1',
             prompt: 'Pourquoi répartir le budget sur le découpage du travail (WBS) ?',
             choices: [
               'Pour respecter une obligation comptable',
@@ -147,7 +147,7 @@ export const depenses: Course = {
               'Un montant global ne se compare à rien. En répartissant le budget sur les lots de travail, chaque élément porte sa part et devient mesurable — c’est la condition de tout suivi de performance.',
           },
           {
-            id: 'q2',
+            id: 'qcm-budget-reference-q2',
             prompt: 'Qu’est-ce que la courbe en S d’un projet ?',
             choices: [
               'La courbe des risques identifiés au fil du temps',
@@ -160,7 +160,7 @@ export const depenses: Course = {
               'La courbe cumulée du budget prévu — lente au démarrage, rapide au milieu, lente en fin — est la référence contre laquelle on compare le réalisé. Sans elle, un montant consommé n’est ni bon ni mauvais.',
           },
           {
-            id: 'q3',
+            id: 'qcm-budget-reference-q3',
             prompt: 'Sur quelle notion de dépense pilote-t-on la performance d’un projet ?',
             choices: ['L’engagé', 'Le facturé', 'L’encouru', 'Le décaissé'],
             answer: 2,
@@ -168,11 +168,11 @@ export const depenses: Course = {
               'L’encouru correspond au travail effectivement réalisé, indépendamment du calendrier des factures. C’est la seule notion qui reflète la performance du projet au moment où on la mesure.',
           },
           {
-            id: 'q4',
+            id: 'qcm-budget-reference-q4',
             prompt: 'Un projet paraît nettement sous-consommé depuis quatre mois. Quelle hypothèse vérifier en premier ?',
             choices: [
               'Que l’équipe travaille bien plus vite que prévu',
-              'Que le suivi se fait sur le facturé, et que du travail réalisé n’est pas encore encouru',
+              'Que le suivi se fait sur le facturé, et que l’encouru n’est pas collecté',
               'Que le budget initial était trop élevé',
               'Que les fournisseurs ont abandonné le projet',
             ],
@@ -181,7 +181,7 @@ export const depenses: Course = {
               'C’est l’illusion la plus fréquente du suivi budgétaire : les factures arrivent avec plusieurs semaines ou mois de retard, et le projet semble économe jusqu’à ce que tout tombe d’un coup. On la lève en collectant le travail réalisé, pas les factures.',
           },
           {
-            id: 'q5',
+            id: 'qcm-budget-reference-q5',
             prompt: 'Que faire lorsqu’un écart important apparaît par rapport à la référence budgétaire ?',
             choices: [
               'Ajuster la référence pour supprimer l’écart',
@@ -322,7 +322,7 @@ export const depenses: Course = {
         title: 'QCM — La valeur acquise',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-valeur-acquise-q1',
             prompt: 'Un lot budgété 100 k€ est réalisé à 50 %. Sa valeur acquise est de…',
             choices: ['100 k€', '50 k€', 'le montant réellement dépensé', '0 k€ tant qu’il n’est pas terminé'],
             answer: 1,
@@ -330,7 +330,7 @@ export const depenses: Course = {
               'La valeur acquise valorise le travail accompli au budget initialement prévu : 50 % de 100 k€ = 50 k€, indépendamment de ce que ce travail a réellement coûté.',
           },
           {
-            id: 'q2',
+            id: 'qcm-valeur-acquise-q2',
             prompt: 'VA = 160 k€, CR = 210 k€, VP = 200 k€. Comment se porte le projet ?',
             choices: [
               'En avance et en économie',
@@ -343,7 +343,7 @@ export const depenses: Course = {
               'Écart de coût = VA − CR = − 50 k€ (dépassement) ; écart de délai = VA − VP = − 40 k€ (retard). Un suivi limité au consommé (210 contre 200 prévus) aurait laissé croire à une situation presque normale.',
           },
           {
-            id: 'q3',
+            id: 'qcm-valeur-acquise-q3',
             prompt: 'Que signifie un IPC de 0,76 ?',
             choices: [
               'Le projet est réalisé à 76 %',
@@ -356,7 +356,7 @@ export const depenses: Course = {
               'L’indice de performance des coûts (VA ÷ CR) exprime le rendement de la dépense. À 0,76, la production de valeur est inférieure d’un quart à la dépense engagée.',
           },
           {
-            id: 'q4',
+            id: 'qcm-valeur-acquise-q4',
             prompt: 'Projet budgété 500 k€, IPC de 0,80 et dérive structurelle. Quel coût à terminaison projeter ?',
             choices: ['400 k€', '500 k€', 'environ 625 k€', 'environ 540 k€'],
             answer: 2,
@@ -364,7 +364,7 @@ export const depenses: Course = {
               'Quand la cause de la dérive persiste, on projette le reste-à-faire à la performance observée : 500 ÷ 0,80 = 625 k€. Si la dérive était ponctuelle et traitée, on projetterait le reste au budget prévu.',
           },
           {
-            id: 'q5',
+            id: 'qcm-valeur-acquise-q5',
             prompt: 'Quelle condition rend les indices de valeur acquise fiables ?',
             choices: [
               'Disposer d’un logiciel spécialisé',
@@ -482,7 +482,7 @@ export const depenses: Course = {
         title: 'QCM — Piloter par le reste-à-faire',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-reste-a-faire-q1',
             prompt: 'Pourquoi le reste-à-faire calculé par soustraction (budget − consommé) est-il insuffisant ?',
             choices: [
               'Parce que le calcul est trop complexe',
@@ -495,7 +495,7 @@ export const depenses: Course = {
               'La soustraction ne contient aucune information nouvelle : elle reconduit l’hypothèse initiale. Le reste-à-faire utile est réestimé à partir de ce que le projet a appris — complexité découverte, productivité réelle, reprises.',
           },
           {
-            id: 'q2',
+            id: 'qcm-reste-a-faire-q2',
             prompt: 'Quelle question poser à un responsable de lot pour obtenir une information fiable ?',
             choices: [
               '« À quel pourcentage en es-tu ? »',
@@ -508,7 +508,7 @@ export const depenses: Course = {
               'Un pourcentage appelle une réponse rassurante et invérifiable ; une demande de reste-à-faire appelle un engagement chiffré. Cette simple reformulation fait remonter les difficultés des mois plus tôt.',
           },
           {
-            id: 'q3',
+            id: 'qcm-reste-a-faire-q3',
             prompt: 'Un responsable annonce un reste-à-faire conforme au budget alors que son IPC est de 0,70. Que faire ?',
             choices: [
               'Accepter son estimation, il connaît son lot',
@@ -521,7 +521,7 @@ export const depenses: Course = {
               'Un retour soudain à la performance nominale doit s’expliquer par un fait concret (fin d’une difficulté, renfort, changement de méthode). Sans explication, l’estimation reconduit un espoir plutôt qu’une prévision.',
           },
           {
-            id: 'q4',
+            id: 'qcm-reste-a-faire-q4',
             prompt: 'Dans le bloc « causes » d’un tableau de bord des coûts, que présente-t-on ?',
             choices: [
               'L’intégralité des lignes budgétaires',
@@ -534,7 +534,7 @@ export const depenses: Course = {
               'Sur la plupart des projets, quelques lots portent l’essentiel de la dérive. Les isoler permet une discussion utile en quelques minutes ; présenter tout le budget dilue l’information et fait manquer l’essentiel.',
           },
           {
-            id: 'q5',
+            id: 'qcm-reste-a-faire-q5',
             prompt: 'Que révèle un tableau de bord vert pendant des mois puis brutalement rouge ?',
             choices: [
               'Un projet ayant subi un événement imprévisible',

@@ -15,15 +15,21 @@ export default function ValeurAcquiseExercice() {
   const calcul = useMemo(() => {
     const ecartCout = va - cr;
     const ecartDelai = va - vp;
-    const ipc = cr > 0 ? va / cr : 0;
-    const ipd = vp > 0 ? va / vp : 0;
-    const terminaisonStructurelle = ipc > 0 ? budget / ipc : 0;
+    // Un indice n'a pas de sens tant que son dénominateur est nul : afficher
+    // zéro laisserait lire « coût à terminaison : 0 k€ » sur un projet de
+    // 500 k€, ce qui se prend pour un résultat.
+    const ipc = cr > 0 ? va / cr : null;
+    const ipd = vp > 0 ? va / vp : null;
+    const terminaisonStructurelle = ipc !== null && ipc > 0 ? budget / ipc : null;
     const terminaisonPonctuelle = budget - ecartCout;
     return { ecartCout, ecartDelai, ipc, ipd, terminaisonStructurelle, terminaisonPonctuelle };
   }, [budget, vp, va, cr]);
 
-  const fmt = (n: number) => `${n >= 0 ? '' : '− '}${Math.abs(Math.round(n))} k€`;
-  const fmtIndice = (n: number) => n.toFixed(2);
+  const fmt = (n: number | null) =>
+    n === null ? '—' : `${n >= 0 ? '' : '−'}${Math.abs(Math.round(n)).toLocaleString('fr-FR')} k€`;
+  // Le séparateur décimal français, cohérent avec le « 0,76 » de la leçon.
+  const fmtIndice = (n: number | null) =>
+    n === null ? '—' : n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   const champs = [
     { id: 'budget', label: 'Budget total (BAC)', value: budget, set: setBudget, hint: 'Budget à l’achèvement.' },
@@ -87,21 +93,25 @@ export default function ValeurAcquiseExercice() {
 
         <div className="exercise__row">
           <span className="exercise__key">Indice de coût (IPC)</span>
-          <span className={`exercise__value mono ${calcul.ipc < 1 ? 'is-bad' : 'is-good'}`}>
+          <span className={`exercise__value mono ${calcul.ipc !== null && calcul.ipc < 1 ? 'is-bad' : 'is-good'}`}>
             {fmtIndice(calcul.ipc)}
           </span>
           <span className="exercise__read">
-            Chaque euro dépensé produit {Math.round(calcul.ipc * 100)} centimes de la valeur prévue.
+            {calcul.ipc === null
+              ? 'Renseignez un coût réel pour calculer cet indice.'
+              : `Chaque euro dépensé produit ${Math.round(calcul.ipc * 100)} centimes de la valeur prévue.`}
           </span>
         </div>
 
         <div className="exercise__row">
           <span className="exercise__key">Indice de délai (IPD)</span>
-          <span className={`exercise__value mono ${calcul.ipd < 1 ? 'is-bad' : 'is-good'}`}>
+          <span className={`exercise__value mono ${calcul.ipd !== null && calcul.ipd < 1 ? 'is-bad' : 'is-good'}`}>
             {fmtIndice(calcul.ipd)}
           </span>
           <span className="exercise__read">
-            Le rythme de production atteint {Math.round(calcul.ipd * 100)} % de ce qui était planifié.
+            {calcul.ipd === null
+              ? 'Renseignez une valeur planifiée pour calculer cet indice.'
+              : `Le rythme de production atteint ${Math.round(calcul.ipd * 100)} % de ce qui était planifié.`}
           </span>
         </div>
       </div>
@@ -128,7 +138,7 @@ export default function ValeurAcquiseExercice() {
         </div>
       </div>
 
-      {calcul.terminaisonStructurelle > budget * 1.1 && (
+      {calcul.terminaisonStructurelle !== null && calcul.terminaisonStructurelle > budget * 1.1 && (
         <p className="exercise__alert">
           Avec ces chiffres, l’hypothèse structurelle projette un dépassement supérieur à 10 % du budget. C’est un
           seuil qui justifie presque toujours de remonter l’arbitrage au commanditaire, avec les deux scénarios et

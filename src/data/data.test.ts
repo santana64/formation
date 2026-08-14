@@ -131,6 +131,18 @@ describe('QCM', () => {
     }
   });
 
+  it('n’ont pas d’identifiant de question en double dans un même parcours', () => {
+    // Les réponses sont indexées par identifiant de question : deux modules du
+    // même parcours qui réutilisent « q1 » font fuiter les réponses de l'un
+    // vers l'autre. C'est arrivé, et l'unicité par QCM ne suffisait pas à le voir.
+    for (const course of courses) {
+      const ids = course.modules.flatMap((m) => m.quiz.questions.map((q) => `${m.id}/${q.id}`));
+      const bruts = course.modules.flatMap((m) => m.quiz.questions.map((q) => q.id));
+      expect(new Set(ids).size, course.id).toBe(ids.length);
+      expect(new Set(bruts).size, `identifiants réutilisés entre modules de ${course.id}`).toBe(bruts.length);
+    }
+  });
+
   it('n’ont pas d’identifiant de question en double dans un même QCM', () => {
     for (const course of courses) {
       for (const mod of course.modules) {

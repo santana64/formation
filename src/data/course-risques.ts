@@ -118,7 +118,7 @@ export const risques: Course = {
         title: 'QCM — Identifier les risques',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-identifier-q1',
             prompt: 'Quelle est la différence entre un risque et un problème ?',
             choices: [
               'Aucune, ce sont des synonymes',
@@ -131,7 +131,7 @@ export const risques: Course = {
               'Le risque peut survenir (on peut s’y préparer, le prévenir, s’en protéger) ; le problème est avéré (on ne peut plus que le traiter). Toute la valeur de la démarche est d’agir avant.',
           },
           {
-            id: 'q2',
+            id: 'qcm-identifier-q2',
             prompt: 'Pourquoi analyser les hypothèses de la charte lors de l’identification des risques ?',
             choices: [
               'Pour vérifier l’orthographe du document',
@@ -144,7 +144,7 @@ export const risques: Course = {
               '« Le métier sera disponible », « le budget sera voté »… Chaque hypothèse est une condition supposée vraie : si elle ne se réalise pas, le projet est affecté. Les hypothèses sont donc une mine de risques déjà à moitié formulés.',
           },
           {
-            id: 'q3',
+            id: 'qcm-identifier-q3',
             prompt: 'Quel angle mort est le plus fréquent dans les ateliers d’identification ?',
             choices: [
               'Les risques techniques, toujours oubliés',
@@ -157,7 +157,7 @@ export const risques: Course = {
               'Les équipes identifient spontanément les risques techniques de leur domaine. Les causes d’échec les plus fréquentes — humaines et organisationnelles — doivent être provoquées par des catégories imposées dans l’atelier.',
           },
           {
-            id: 'q4',
+            id: 'qcm-identifier-q4',
             prompt: 'Quel est l’intérêt de formuler un risque en « cause – événement – conséquence » ?',
             choices: [
               'Allonger le registre des risques',
@@ -170,7 +170,7 @@ export const risques: Course = {
               'Cette formulation évite les risques vagues (« problèmes de planning ») : la cause indique où agir en prévention, l’événement ce qu’on surveille, la conséquence ce qu’on évalue.',
           },
           {
-            id: 'q5',
+            id: 'qcm-identifier-q5',
             prompt: '« Si le nouveau composant tient ses promesses, nous gagnerions trois semaines. » De quoi s’agit-il ?',
             choices: [
               'D’un problème à traiter en urgence',
@@ -183,7 +183,7 @@ export const risques: Course = {
               'Un risque est un événement incertain affectant les objectifs — l’effet peut être défavorable (menace) ou favorable (opportunité). Les opportunités se gèrent avec des stratégies symétriques : exploiter, améliorer, partager, accepter.',
           },
           {
-            id: 'q6',
+            id: 'qcm-identifier-q6',
             prompt: 'À quoi sert de faire expliciter l’appétence au risque du commanditaire ?',
             choices: [
               'À obtenir un budget plus important',
@@ -230,7 +230,7 @@ export const risques: Course = {
               type: 'chart',
               chart: 'matrice-risques',
               caption:
-                "Le chiffre de chaque case est le produit des deux cotations. Les seuils entre zones sont un choix d'organisation : ils se fixent au cadrage, avec le commanditaire.",
+                "Le chiffre de chaque case est le produit des deux cotations. Notez la colonne « critique », entièrement classée inacceptable : le produit sert à ordonner, pas à mesurer, et il sous-pondère les événements rares à conséquence grave. Une règle de garde sur l'impact corrige ce biais. Les seuils, eux, se fixent au cadrage avec le commanditaire.",
             },
             {
               type: 'p',
@@ -310,7 +310,7 @@ export const risques: Course = {
         title: 'QCM — Évaluer et hiérarchiser',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-evaluer-q1',
             prompt: 'Comment se calcule la criticité d’un risque ?',
             choices: [
               'Probabilité + impact',
@@ -323,7 +323,7 @@ export const risques: Course = {
               'La criticité combine la vraisemblance (probabilité) et la gravité (impact) : un événement quasi certain à impact critique domine le classement ; un événement rare à impact mineur est simplement surveillé.',
           },
           {
-            id: 'q2',
+            id: 'qcm-evaluer-q2',
             prompt: 'Pourquoi définir des échelles d’impact chiffrées avant la cotation ?',
             choices: [
               'Pour faire plus professionnel dans le rapport',
@@ -336,7 +336,7 @@ export const risques: Course = {
               'Sans seuils concrets (semaines de retard, % du budget), chacun cote selon son intuition et la matrice perd toute objectivité. Les échelles chiffrées transforment le débat d’opinion en débat de faits.',
           },
           {
-            id: 'q3',
+            id: 'qcm-evaluer-q3',
             prompt: 'Quelle méthode de cotation limite le « consensus mou » ?',
             choices: [
               'Faire coter uniquement le chef de projet',
@@ -349,7 +349,7 @@ export const risques: Course = {
               'La cotation individuelle préserve les avis divergents ; la discussion des écarts fait émerger les informations que certains détiennent et pas d’autres — c’est là que l’exercice crée de la valeur.',
           },
           {
-            id: 'q4',
+            id: 'qcm-evaluer-q4',
             prompt: 'Que fait-on des risques qui ne figurent pas dans le « top 5–10 » ?',
             choices: [
               'On les supprime du registre pour alléger le suivi',
@@ -362,7 +362,7 @@ export const risques: Course = {
               'Le contexte change : un risque mineur peut devenir critique (nouveau fournisseur, changement réglementaire, départ d’un expert). La revue périodique du registre complet est ce qui évite les angles morts.',
           },
           {
-            id: 'q5',
+            id: 'qcm-evaluer-q5',
             prompt: 'Un risque a 40 % de probabilité et un impact estimé à 60 k€. Quelle est son exposition ?',
             choices: ['100 k€', '60 k€', '24 k€', '40 k€'],
             answer: 2,
@@ -370,7 +370,7 @@ export const risques: Course = {
               'L’exposition (valeur monétaire attendue) vaut probabilité × impact, soit 0,40 × 60 k€ = 24 k€. Ce montant ne prédit pas le coût réel du risque isolé, mais il permet de dimensionner une provision sur l’ensemble du portefeuille.',
           },
           {
-            id: 'q6',
+            id: 'qcm-evaluer-q6',
             prompt: 'Quelle est la différence entre provision pour aléas et provision de gestion ?',
             choices: [
               'Aucune, ce sont deux noms pour la même enveloppe',
@@ -477,7 +477,7 @@ export const risques: Course = {
         title: 'QCM — Traiter et suivre',
         questions: [
           {
-            id: 'q1',
+            id: 'qcm-traiter-q1',
             prompt: 'Retirer du périmètre une fonctionnalité à la technologie incertaine relève de quelle stratégie ?',
             choices: ['Réduire', 'Transférer', 'Éviter', 'Accepter'],
             answer: 2,
@@ -485,7 +485,7 @@ export const risques: Course = {
               'Éviter consiste à supprimer la cause même du risque en changeant l’approche ou le périmètre : le risque ne peut plus survenir. Réduire ne ferait qu’en diminuer la probabilité ou l’impact.',
           },
           {
-            id: 'q2',
+            id: 'qcm-traiter-q2',
             prompt: 'Que transfère réellement une clause de pénalités de retard chez un fournisseur ?',
             choices: [
               'La totalité du risque, qui disparaît du projet',
@@ -498,7 +498,7 @@ export const risques: Course = {
               'Le transfert couvre l’exposition financière, pas les conséquences opérationnelles : si le fournisseur livre en retard, les pénalités indemnisent, mais le planning du projet est quand même touché. Un plan de réduction reste souvent nécessaire.',
           },
           {
-            id: 'q3',
+            id: 'qcm-traiter-q3',
             prompt: 'Qu’est-ce qu’une acceptation « active » d’un risque ?',
             choices: [
               'Oublier le risque puisqu’on ne peut rien faire',
@@ -511,7 +511,7 @@ export const risques: Course = {
               'Accepter est une décision, pas une négligence : on documente le choix, on provisionne l’impact éventuel et on définit le signal qui déclencherait une réaction. L’acceptation passive (l’oubli) n’est pas une stratégie.',
           },
           {
-            id: 'q4',
+            id: 'qcm-traiter-q4',
             prompt: 'Quel est l’intérêt de définir à l’avance le déclencheur d’un plan de contingence ?',
             choices: [
               'Pouvoir activer le plan B sur un critère objectif, sans attendre que la crise soit installée',
@@ -524,7 +524,7 @@ export const risques: Course = {
               'Sans déclencheur défini (« recette non commencée au 15 mars »), on repousse la décision en espérant que « ça va rentrer dans l’ordre » — et on active le plan B trop tard. Le déclencheur objectif dépersonnalise et accélère la décision.',
           },
           {
-            id: 'q5',
+            id: 'qcm-traiter-q5',
             prompt: 'Pourquoi réidentifier les risques à chaque changement de phase ?',
             choices: [
               'Pour satisfaire une exigence documentaire',
@@ -537,7 +537,7 @@ export const risques: Course = {
               'Les risques de la recette n’ont rien à voir avec ceux de la conception. Un registre construit une fois pour toutes en début de projet devient rapidement une photographie périmée de l’exposition réelle.',
           },
           {
-            id: 'q6',
+            id: 'qcm-traiter-q6',
             prompt: 'Quelle est la bonne manière d’escalader un risque au commanditaire ?',
             choices: [
               'Transmettre le registre complet et attendre ses instructions',

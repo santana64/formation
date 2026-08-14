@@ -62,7 +62,11 @@ export default function QuizPage() {
           )}
         </header>
 
-        <QuizEngine quiz={module.quiz} courseId={course.id} moduleId={module.id} />
+        {/* La route est la même pour tous les modules : sans `key`, React
+            réutilise l'instance et les réponses du module précédent restent en
+            place — d'autant que les identifiants de questions (q1, q2…) se
+            répètent d'un module à l'autre. Le QCM suivant s'affichait corrigé. */}
+        <QuizEngine key={module.id} quiz={module.quiz} courseId={course.id} moduleId={module.id} />
 
         <nav className="lesson-nav" aria-label="Navigation dans le parcours">
           {prev ? (
