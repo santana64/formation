@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import { courses, courseLessonCount, courseQuestionCount, courseMinutes, formatMinutes } from '../data';
 import { company } from '../data/company';
 import { usePageMeta } from '../lib/meta';
+import { useAuth } from '../lib/auth';
 import CourseCard from '../components/CourseCard';
 import { courseProgress, useProgress } from '../lib/progress';
 
 export default function Home() {
+  const { session } = useAuth();
   usePageMeta(
     'Formations en management de projet',
     'Cours écrits, QCM corrigés et vidéos en management de projet, par FGF Consultant. Accès libre, sans inscription.',
@@ -39,8 +41,8 @@ export default function Home() {
               <Link to="/formations" className="btn btn--primary btn--lg">
                 Découvrir les parcours
               </Link>
-              <Link to="/progression" className="btn btn--ghost btn--lg">
-                Ma progression
+              <Link to={session ? '/progression' : '/inscription'} className="btn btn--ghost btn--lg">
+                {session ? 'Ma progression' : 'Créer un compte'}
               </Link>
             </div>
           </div>
@@ -65,9 +67,10 @@ export default function Home() {
               </div>
             </dl>
             <p className="hero__panel-note">
-              Accès libre, sans inscription ni compte. Pour une session animée en présentiel, une formation
-              intra-entreprise ou une préparation aux certifications {company.certifications.join(', ')},{' '}
-              <Link to="/a-propos">contactez-nous</Link>.
+              Le contenu est en accès libre. <Link to="/inscription">Créer un compte</Link> vous permet en plus de
+              retrouver votre progression sur tous vos appareils, de gagner des badges et de recevoir vos
+              attestations. Pour une session animée en présentiel ou une préparation aux certifications{' '}
+              {company.certifications.join(', ')}, <Link to="/a-propos">contactez-nous</Link>.
             </p>
           </aside>
         </div>

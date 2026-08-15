@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { company } from './data/company';
-import { useAuth } from './lib/auth';
+import { hasRole, useAuth } from './lib/auth';
 import OfflineBanner from './components/OfflineBanner';
 
 /**
@@ -36,7 +36,7 @@ export default function App() {
   const { pathname } = useLocation();
   const mainRef = useRef<HTMLElement>(null);
   useRouteChangeFocus(mainRef);
-  const { session, profile, enabled } = useAuth();
+  const { session, profile } = useAuth();
 
   useEffect(() => {
     setMenuOpen(false);
@@ -77,17 +77,28 @@ export default function App() {
                 {item.label}
               </NavLink>
             ))}
-            {enabled && (
-              <span className="session-nav">
-                {session ? (
-                  <NavLink to="/compte">
-                    <span className="session-nav__name">{profile?.full_name || 'Mon compte'}</span>
-                  </NavLink>
-                ) : (
-                  <NavLink to="/connexion">Connexion</NavLink>
-                )}
-              </span>
-            )}
+
+            {/* Les espaces d'encadrement n'étaient atteignables qu'en saisissant
+                leur URL : leur seule barre de navigation vivait à l'intérieur
+                d'eux-mêmes. Ils apparaissent maintenant selon le rôle. */}
+            {hasRole(profile, 'formateur') && <NavLink to="/formateur">Mes cours</NavLink>}
+            {hasRole(profile, 'referent_entreprise') && <NavLink to="/entreprise">Mes apprenants</NavLink>}
+            {profile?.role === 'admin' && <NavLink to="/admin/comptes">Administration</NavLink>}
+
+            {/* Toujours visible, même sans backend configuré : masquer l'entrée
+                donnait à croire que la plateforme n'a pas de comptes du tout.
+                La page de connexion explique alors clairement l'indisponibilité. */}
+            <span className="session-nav">
+              {session ? (
+                <NavLink to="/compte">
+                  <span className="session-nav__name">{profile?.full_name || 'Mon compte'}</span>
+                </NavLink>
+              ) : (
+                <NavLink to="/connexion" className="session-nav__signin">
+                  Connexion
+                </NavLink>
+              )}
+            </span>
           </nav>
         </div>
       </header>
